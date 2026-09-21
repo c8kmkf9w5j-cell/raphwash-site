@@ -1,9 +1,5 @@
 <!doctype html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>RaphWash</title>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>RaphWash</title>
 <style>
   :root{
     --bg:#050607;
@@ -263,6 +259,26 @@
   .time-slot.selected{background:var(--grad-blue);color:#F5F5F2;border-color:transparent;}
   .slot-note{margin-top:16px;font-size:12.5px;color:var(--text-muted);}
 
+  .avail-card{border:1px solid var(--border);background:var(--surface);border-radius:16px;padding:20px;margin-bottom:18px;}
+  .avail-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;flex-wrap:wrap;}
+  .avail-title{display:flex;align-items:center;gap:9px;font-weight:800;font-size:14.5px;}
+  .avail-title svg{width:18px;height:18px;color:var(--blue);flex:none;}
+  .avail-nav{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--text-muted);font-weight:700;white-space:nowrap;}
+  .avail-nav button{width:28px;height:28px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);flex:none;}
+  .avail-nav button:hover:not(:disabled){border-color:var(--blue);}
+  .avail-nav button:disabled{opacity:.35;cursor:default;}
+  .avail-nav svg{width:13px;height:13px;}
+  .day-card{flex:none;min-width:116px;border:1px solid var(--border);border-radius:12px;padding:12px 10px;background:var(--surface-2);}
+  .day-card .day-head{text-align:center;font-size:11.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.03em;margin-bottom:10px;}
+  .day-card .day-head b{display:block;font-size:14.5px;color:var(--text);font-weight:800;margin-top:2px;text-transform:none;letter-spacing:0;}
+  .day-slots{display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto;padding-right:2px;}
+  .day-slots::-webkit-scrollbar{width:5px;}
+  .day-slots::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+  .day-slot{border:1px solid var(--border);border-radius:8px;padding:7px 4px;text-align:center;font-size:12.5px;font-weight:700;color:var(--blue);cursor:pointer;background:transparent;width:100%;font-family:var(--sans);}
+  .day-slot.selected{background:var(--grad-blue);color:#F5F5F2;border-color:transparent;}
+  .avail-cta{opacity:.45;pointer-events:none;transition:opacity .15s;}
+  .avail-cta.ready{opacity:1;pointer-events:auto;}
+
   .recap-box{border:1px solid var(--border);background:var(--surface-2);border-radius:12px;padding:15px;display:flex;flex-direction:column;gap:9px;margin-bottom:18px;}
   .recap-row{display:flex;justify-content:space-between;gap:12px;font-size:14px;}
   .recap-row span:first-child{color:var(--text-muted);}
@@ -292,12 +308,10 @@
   .foot-social a:hover{border-color:var(--blue);box-shadow:var(--glow-blue);transform:translateY(-2px);}
   .foot-social svg{width:19px;height:19px;}
 </style>
-</head>
-<body>
-
+</head><body>
 <header>
   <div class="wrap nav">
-    <div class="brand"><span style="font-family:var(--display);font-size:22px;text-transform:uppercase;letter-spacing:.02em;">RAPH<span style="color:var(--gold)">WASH</span></span></div>
+    <div class="brand"><span style="font-family:var(--display);letter-spacing:.02em;">RAPH<span style="color:var(--gold);">WASH</span></span></div>
     <ul class="nav-links">
       <li><a href="#services">Prestations</a></li>
       <li><a href="#avis">Avis</a></li>
@@ -595,8 +609,19 @@
         <div class="step-panel" data-step="3" hidden>
           <div class="step-title">Étape 3 — Choisissez votre créneau</div>
           <div class="recap-box" id="wiz-recap"></div>
-          <div id="calendly-embed" style="min-width:280px;min-height:680px;"></div>
-          <p class="slot-note">Le calendrier ci-dessus affiche vos disponibilités réelles — la réservation est confirmée instantanément par Calendly (email de confirmation envoyé au client).</p>
+          <div class="avail-card">
+            <div class="avail-head">
+              <div class="avail-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Prochaines disponibilités</div>
+              <div class="avail-nav">
+                <button type="button" id="week-prev" aria-label="Semaine précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-6 7 6 7"/></svg></button>
+                <span id="week-range"></span>
+                <button type="button" id="week-next" aria-label="Semaine suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l6 7-6 7"/></svg></button>
+              </div>
+            </div>
+            <div class="day-tabs" id="wiz-days"></div>
+          </div>
+          <p class="slot-note">Créneaux indicatifs — sélectionnez celui qui vous convient, puis confirmez et réglez l'acompte sur Calendly.</p>
+          <a href="#" id="calendly-cta" target="_blank" rel="noopener" class="btn btn-grad avail-cta" style="width:100%;margin-top:14px;">Réserver ce créneau sur Calendly →</a>
         </div>
 
         <p class="wizard-error" id="wiz-error"></p>
@@ -626,7 +651,7 @@
 
 <footer>
   <div class="wrap foot-grid">
-    <div class="foot-brand"><span style="font-family:var(--display);font-size:17px;text-transform:uppercase;letter-spacing:.02em;">RAPH<span style="color:var(--gold)">WASH</span></span></div>
+    <div class="foot-brand"><span style="font-family:var(--display);letter-spacing:.02em;">RAPH<span style="color:var(--gold);">WASH</span></span></div>
     <ul class="foot-links">
       <li><a href="#services">Prestations</a></li>
       <li><a href="#tarifs">Formules</a></li>
@@ -651,8 +676,6 @@
 </footer>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&display=swap">
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
 <script>
   (function(){
@@ -665,9 +688,22 @@
       Signature: 'https://calendly.com/raphwash/signature',
       Prestige: 'https://calendly.com/raphwash/prestige'
     };
+    function getTimeSlots(dow){
+      var startH = (dow === 0) ? 9 : 8;
+      var endH = (dow === 0) ? 19 : 20;
+      var slots = [];
+      for (var h = startH; h <= endH; h++){
+        for (var m = 0; m < 60; m += 30){
+          if (h === endH && m > 0) break;
+          slots.push((h < 10 ? '0' + h : h) + ':' + (m === 0 ? '00' : m));
+        }
+      }
+      return slots;
+    }
     var totalSteps = 3;
     var currentStep = 1;
-    var state = { formule: null };
+    var weekOffset = 0;
+    var state = { formule: null, date: null, dateLabel: null, heure: null };
 
     var stepper = document.getElementById('wiz-stepper');
     var panels = form.querySelectorAll('.step-panel');
@@ -675,20 +711,75 @@
     var nextBtn = document.getElementById('wiz-next');
     var errorEl = document.getElementById('wiz-error');
     var recapEl = document.getElementById('wiz-recap');
-    var calendlyEl = document.getElementById('calendly-embed');
+    var daysEl = document.getElementById('wiz-days');
+    var weekRangeEl = document.getElementById('week-range');
+    var weekPrevBtn = document.getElementById('week-prev');
+    var weekNextBtn = document.getElementById('week-next');
+    var calendlyCta = document.getElementById('calendly-cta');
 
-    function renderCalendly(){
-      var baseUrl = CALENDLY_URLS[state.formule] || CALENDLY_URLS.Riviera;
-      var url = baseUrl + '?background_color=18384d&text_color=f5f5f2&primary_color=4a87ac&hide_gdpr_banner=1';
-      calendlyEl.innerHTML = '';
-      if (window.Calendly && typeof window.Calendly.initInlineWidget === 'function'){
-        window.Calendly.initInlineWidget({ url: url, parentElement: calendlyEl });
-      } else {
-        calendlyEl.innerHTML =
-          '<p class="form-note" style="margin-bottom:14px;">Le calendrier interactif n\'a pas pu se charger.</p>' +
-          '<a href="' + baseUrl + '" target="_blank" rel="noopener" class="btn btn-grad">Ouvrir Calendly dans un nouvel onglet →</a>';
+    function capitalize(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
+    function buildDays(){
+      daysEl.innerHTML = '';
+      var start = new Date();
+      start.setDate(start.getDate() + weekOffset * 7);
+      var end = new Date(start);
+      end.setDate(end.getDate() + 6);
+      weekRangeEl.textContent = start.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) + ' – ' + end.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
+      weekPrevBtn.disabled = (weekOffset === 0);
+      weekNextBtn.disabled = (weekOffset >= 7);
+
+      for (var i = 0; i < 7; i++){
+        var d = new Date(start);
+        d.setDate(d.getDate() + i);
+        var iso = d.toISOString().slice(0, 10);
+        var dow = capitalize(d.toLocaleDateString('fr-FR', { weekday: 'short' })).replace('.', '') + '.';
+        var dom = d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+        var full = capitalize(d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }));
+
+        var card = document.createElement('div');
+        card.className = 'day-card';
+        var head = document.createElement('div');
+        head.className = 'day-head';
+        head.innerHTML = dow + '<b>' + dom + '</b>';
+        card.appendChild(head);
+
+        var slots = document.createElement('div');
+        slots.className = 'day-slots';
+        getTimeSlots(d.getDay()).forEach(function(t){
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'day-slot';
+          if (state.date === iso && state.heure === t) btn.classList.add('selected');
+          btn.textContent = t;
+          btn.addEventListener('click', function(){
+            daysEl.querySelectorAll('.day-slot').forEach(function(s){ s.classList.remove('selected'); });
+            this.classList.add('selected');
+            state.date = iso;
+            state.dateLabel = full;
+            state.heure = t;
+            updateCalendlyCta();
+          });
+          slots.appendChild(btn);
+        });
+        card.appendChild(slots);
+        daysEl.appendChild(card);
       }
     }
+
+    function updateCalendlyCta(){
+      var ready = !!(state.date && state.heure);
+      calendlyCta.classList.toggle('ready', ready);
+      var baseUrl = CALENDLY_URLS[state.formule] || CALENDLY_URLS.Riviera;
+      calendlyCta.href = baseUrl;
+    }
+
+    weekPrevBtn.addEventListener('click', function(){
+      if (weekOffset > 0){ weekOffset--; buildDays(); }
+    });
+    weekNextBtn.addEventListener('click', function(){
+      if (weekOffset < 7){ weekOffset++; buildDays(); }
+    });
 
     form.querySelectorAll('input[name="formule"]').forEach(function(r){
       r.addEventListener('change', function(){
@@ -719,7 +810,7 @@
       panels.forEach(function(p){ p.hidden = (parseInt(p.dataset.step, 10) !== n); });
       backBtn.style.visibility = (n === 1) ? 'hidden' : 'visible';
       nextBtn.hidden = (n === totalSteps);
-      if (n === totalSteps){ buildRecap(); renderCalendly(); }
+      if (n === totalSteps){ buildRecap(); buildDays(); updateCalendlyCta(); }
       errorEl.classList.remove('show');
       updateStepper();
     }
@@ -733,7 +824,7 @@
         ['Véhicule', (vehicule || '—') + (type ? ' (' + type + ')' : '')],
         ['Lieu', cp || '—']
       ];
-      recapEl.innerHTML = '<p class="form-note" style="margin-bottom:6px;">Merci de reprendre ces informations dans le champ de notes de Calendly :</p>' + rows.map(function(r){
+      recapEl.innerHTML = rows.map(function(r){
         return '<div class="recap-row"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>';
       }).join('');
     }
@@ -762,5 +853,4 @@
     showStep(currentStep);
   })();
 </script>
-</body>
-</html>
+</body></html>
