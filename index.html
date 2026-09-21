@@ -158,19 +158,17 @@
   /* zone */
   .zone{border-top:1px solid var(--border);}
   .zone-grid{display:grid;gap:34px;}
-  @media (min-width:880px){ .zone-grid{grid-template-columns:1fr 1fr;align-items:center;} }
-  .radar{
-    aspect-ratio:1;border-radius:50%;position:relative;
-    background:
-      radial-gradient(circle, transparent 0 20%, var(--border) 20% 20.6%, transparent 20.6% 40%, var(--border) 40% 40.6%, transparent 40.6% 60%, var(--border) 60% 60.6%, transparent 60.6% 80%, var(--border) 80% 80.6%, transparent 80.6%),
-      var(--surface);
-    border:1px solid var(--border);
-    display:flex;align-items:center;justify-content:center;max-width:340px;margin-inline:auto;
-  }
-  .radar-core{
-    width:14%;height:14%;background:var(--grad-blue);border-radius:50%;
-    box-shadow:0 0 0 10px rgba(201,164,92,.16), 0 0 0 26px rgba(201,164,92,.07);
-  }
+  @media (min-width:640px){ .zone-grid{grid-template-columns:.85fr 1.15fr;align-items:center;} }
+  .zone-infocard{width:100%;max-width:300px;margin-inline:auto;border:1px solid var(--border);background:var(--surface);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:14px;}
+  .zone-infocard-head{display:flex;align-items:center;gap:12px;}
+  .zone-infocard-icon{width:44px;height:44px;border-radius:12px;background:var(--grad-soft);display:flex;align-items:center;justify-content:center;flex:none;}
+  .zone-infocard-icon svg{width:22px;height:22px;color:var(--blue);}
+  .zone-infocard-head b{font-family:var(--display);text-transform:uppercase;font-size:17px;letter-spacing:.01em;display:block;}
+  .zone-infocard-head span{font-size:12.5px;color:var(--text-muted);}
+  .zone-stat-row{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;border-top:1px solid var(--border);padding-top:14px;}
+  .zone-stat-row:first-of-type{border-top:none;padding-top:0;}
+  .zone-stat-row span:first-child{color:var(--text-muted);}
+  .zone-stat-row span:last-child{font-weight:700;text-align:right;}
   .zone-list{display:flex;flex-direction:column;gap:16px;margin-top:24px;}
   .zone-item{display:flex;gap:14px;align-items:flex-start;}
   .zone-item svg{width:18px;height:18px;color:var(--blue);flex:none;margin-top:2px;}
@@ -323,7 +321,7 @@
 </head><body>
 <header>
   <div class="wrap nav">
-    <div class="brand"><span style="font-family:var(--display);letter-spacing:.02em;">RAPH<span style="color:var(--gold);">WASH</span></span></div>
+    <a href="#" class="brand" aria-label="Retour à l'accueil"><span style="font-family:var(--display);letter-spacing:.02em;">RAPH<span style="color:var(--gold);">WASH</span></span></a>
     <ul class="nav-links">
       <li><a href="#services">Prestations</a></li>
       <li><a href="#avis">Avis</a></li>
@@ -388,15 +386,30 @@
 
 <section class="zone" id="zone">
   <div class="wrap zone-grid">
-    <div class="radar"><div class="radar-core"></div></div>
+    <div>
+      <div class="zone-infocard">
+        <div class="zone-infocard-head">
+          <div class="zone-infocard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+          <div>
+            <b>Zone couverte</b>
+            <span>Saint-Raphaël &amp; Côte d'Azur</span>
+          </div>
+        </div>
+        <div>
+          <div class="zone-stat-row"><span>Ville de base</span><span>Saint-Raphaël</span></div>
+          <div class="zone-stat-row"><span>Rayon d'intervention</span><span>Côte d'Azur</span></div>
+          <div class="zone-stat-row"><span>Déplacement</span><span>Inclus, sans frais</span></div>
+        </div>
+      </div>
+    </div>
     <div>
       <p class="eyebrow">Zone d'intervention</p>
       <h2 style="font-family:var(--display);text-transform:uppercase;font-size:clamp(24px,3vw,34px);margin-top:16px;line-height:1;">On vient à vous, sur toute la Côte d'Azur</h2>
-      <p style="margin-top:16px;font-size:15px;">Basé à Saint-Raphaël, RaphWash intervient à votre domicile ou sur votre lieu de travail, partout sur la Côte d'Azur — aucun déplacement de votre part.</p>
+      <p style="margin-top:16px;font-size:15px;">Basé à Saint-Raphaël, RaphWash intervient à votre domicile ou sur votre lieu de travail, sur toute la Côte d'Azur — aucun déplacement de votre part.</p>
       <div class="zone-list">
         <div class="zone-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p>Saint-Raphaël et environs en priorité, déplacement possible sur le reste de la Côte d'Azur — précisez votre ville en demandant votre devis.</p>
+          <p>Saint-Raphaël et environs en priorité, déplacement possible sur toute la Côte d'Azur — précisez votre ville lors de votre réservation.</p>
         </div>
         <div class="zone-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
