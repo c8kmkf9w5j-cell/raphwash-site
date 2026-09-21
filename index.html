@@ -179,6 +179,7 @@
   /* trust */
   .trust{border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
   .hours-card{max-width:480px;border:1px solid var(--border);background:var(--surface);border-radius:16px;padding:22px 26px;display:flex;flex-direction:column;}
+  .contact-card{max-width:480px;border:1px solid var(--border);background:var(--surface);border-radius:16px;padding:22px 26px;}
   .hours-row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:12px;border-top:1px solid var(--border);}
   .hours-row:first-child{border-top:none;padding-top:0;}
   .hours-row:last-child{padding-bottom:0;}
@@ -236,7 +237,6 @@
   @media (min-width:640px){ .step-label{font-size:12px;} }
 
   .wizard-grid{display:grid;gap:34px;}
-  @media (min-width:920px){ .wizard-grid{grid-template-columns:1.15fr .85fr;align-items:start;} }
   .wizard-panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;order:1;}
   .wizard-aside{order:2;}
   .step-title{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;}
@@ -521,37 +521,6 @@
   </div>
 </section>
 
-<section id="faq">
-  <div class="wrap">
-    <div class="head">
-      <p class="eyebrow">FAQ</p>
-      <h2>Questions fréquentes</h2>
-    </div>
-    <div class="faq-list">
-      <details class="faq-item">
-        <summary>Dois-je être présent pendant l'intervention ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <p>Non, si vous pouvez nous laisser l'accès au véhicule (clés, parking ou emplacement convenu), votre présence n'est pas obligatoire.</p>
-      </details>
-      <details class="faq-item">
-        <summary>De quoi ai-je besoin pour la prestation ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <p>D'un point d'eau et d'un accès à l'électricité à proximité du véhicule. Le reste du matériel et des produits est fourni par nos soins.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Combien de temps dure une intervention ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <p>Entre 1h30 et 4h selon la formule choisie et l'état initial de l'habitacle.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Puis-je annuler ou reporter mon rendez-vous ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <p>Oui, prévenez-nous au moins 24h à l'avance pour reporter votre créneau sans frais.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Intervenez-vous sur tous les types de véhicules ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <p>Citadines, berlines, SUV et utilitaires légers. Pour les véhicules plus volumineux (vans, camping-cars), contactez-nous pour un devis adapté.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
 <section id="reservation">
   <div class="wrap">
     <div class="head">
@@ -567,23 +536,6 @@
     </div>
 
     <div class="wizard-grid">
-      <div class="wizard-aside">
-        <div class="contact-info">
-          <div class="info-row">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg>
-            <div><b>Téléphone</b><a href="tel:+33608228136">06 08 22 81 36</a></div>
-          </div>
-          <div class="info-row">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg>
-            <div><b>E-mail</b><a href="mailto:contact@raphwash.fr">contact@raphwash.fr</a></div>
-          </div>
-          <div class="info-row">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
-            <div><b>Réponse</b><span style="font-size:14px;color:var(--text-muted);">Sous 24 h, jours ouvrés</span></div>
-          </div>
-        </div>
-      </div>
-
       <div id="devis-form" class="wizard-panel">
         <div class="step-panel" data-step="1">
           <div class="step-title">Étape 1 — Choisissez votre formule</div>
@@ -661,6 +613,37 @@
   </div>
 </section>
 
+<section id="faq">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">FAQ</p>
+      <h2>Questions fréquentes</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Dois-je être présent pendant l'intervention ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p>Non, si vous pouvez nous laisser l'accès au véhicule (clés, parking ou emplacement convenu), votre présence n'est pas obligatoire.</p>
+      </details>
+      <details class="faq-item">
+        <summary>De quoi ai-je besoin pour la prestation ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p>D'un point d'eau et d'un accès à l'électricité à proximité du véhicule. Le reste du matériel et des produits est fourni par nos soins.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Combien de temps dure une intervention ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p>Entre 1h30 et 4h selon la formule choisie et l'état initial de l'habitacle.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Puis-je annuler ou reporter mon rendez-vous ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p>Oui, prévenez-nous au moins 24h à l'avance pour reporter votre créneau sans frais.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Intervenez-vous sur tous les types de véhicules ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p>Citadines, berlines, SUV et utilitaires légers. Pour les véhicules plus volumineux (vans, camping-cars), contactez-nous pour un devis adapté.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <section id="horaires">
   <div class="wrap">
     <div class="head">
@@ -675,6 +658,32 @@
   </div>
 </section>
 
+<section id="contact">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Contact</p>
+      <h2>Nos coordonnées</h2>
+      <p>Une question avant de réserver ? Contactez-nous directement.</p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-info">
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg>
+          <div><b>Téléphone</b><a href="tel:+33608228136">06 08 22 81 36</a></div>
+        </div>
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg>
+          <div><b>E-mail</b><a href="mailto:contact@raphwash.fr">contact@raphwash.fr</a></div>
+        </div>
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+          <div><b>Réponse</b><span style="font-size:14px;color:var(--text-muted);">Sous 24 h, jours ouvrés</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap foot-grid">
     <div class="foot-brand"><span style="font-family:var(--display);letter-spacing:.02em;">RAPH<span style="color:var(--gold);">WASH</span></span></div>
@@ -684,6 +693,7 @@
       <li><a href="#zone">Zone d'intervention</a></li>
       <li><a href="#horaires">Horaires</a></li>
       <li><a href="#reservation">Réservation</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
   <div class="wrap foot-social-block">
