@@ -279,10 +279,22 @@
   .avail-cta{opacity:.45;pointer-events:none;transition:opacity .15s;}
   .avail-cta.ready{opacity:1;pointer-events:auto;}
 
+  .deposit-grid{display:grid;gap:28px;grid-template-columns:1fr;margin-top:30px;}
+  @media (min-width:760px){ .deposit-grid{grid-template-columns:1fr 1fr;align-items:start;} }
+  .deposit-col h3{font-family:var(--display);text-transform:uppercase;font-size:clamp(18px,2.4vw,24px);line-height:1.1;margin-bottom:16px;}
+  .deposit-card{border:1px solid var(--gold);background:var(--grad-soft);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px;}
+  .deposit-amount{font-family:var(--display);text-transform:uppercase;font-size:15px;letter-spacing:.04em;color:var(--gold);}
+  .deposit-amount b{font-size:22px;}
+  .deposit-card p{font-size:13px;}
+  .secure-note{display:flex;align-items:center;gap:7px;font-size:12.5px;color:#7fd9a4;margin-top:14px;}
+  .secure-note svg{width:14px;height:14px;flex:none;}
+
   .recap-box{border:1px solid var(--border);background:var(--surface-2);border-radius:12px;padding:15px;display:flex;flex-direction:column;gap:9px;margin-bottom:18px;}
   .recap-row{display:flex;justify-content:space-between;gap:12px;font-size:14px;}
   .recap-row span:first-child{color:var(--text-muted);}
   .recap-row span:last-child{font-weight:700;text-align:right;}
+  .recap-row.recap-highlight span{color:var(--gold);font-weight:800;}
+  .recap-row.recap-highlight{border-top:1px solid var(--border);padding-top:9px;}
 
   .wizard-actions{display:flex;justify-content:space-between;gap:14px;margin-top:28px;}
   .wizard-error{font-size:13px;color:var(--gold);margin-top:14px;display:none;}
@@ -608,7 +620,6 @@
 
         <div class="step-panel" data-step="3" hidden>
           <div class="step-title">Étape 3 — Choisissez votre créneau</div>
-          <div class="recap-box" id="wiz-recap"></div>
           <div class="avail-card">
             <div class="avail-head">
               <div class="avail-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Prochaines disponibilités</div>
@@ -620,8 +631,23 @@
             </div>
             <div class="day-tabs" id="wiz-days"></div>
           </div>
-          <p class="slot-note">Créneaux indicatifs — sélectionnez celui qui vous convient, puis confirmez et réglez l'acompte sur Calendly.</p>
-          <a href="#" id="calendly-cta" target="_blank" rel="noopener" class="btn btn-grad avail-cta" style="width:100%;margin-top:14px;">Réserver ce créneau sur Calendly →</a>
+          <p class="slot-note">Créneaux indicatifs — sélectionnez celui qui vous convient, puis payez l'acompte pour confirmer votre réservation sur Calendly.</p>
+
+          <div class="deposit-grid">
+            <div class="deposit-col">
+              <h3>Payez un acompte pour réserver votre créneau</h3>
+              <div class="deposit-card">
+                <div class="deposit-amount">À régler maintenant : <b id="deposit-amount">—</b></div>
+                <p>Le paiement d'un acompte de 10% garantit votre réservation et nous permet de bloquer votre créneau. Le solde est réglé le jour de l'intervention.</p>
+              </div>
+              <p class="secure-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Paiement 100% sécurisé</p>
+              <a href="#" id="booking-cta" target="_blank" rel="noopener" class="btn btn-grad avail-cta" style="width:100%;margin-top:6px;">Réserver mon lavage →</a>
+            </div>
+            <div class="deposit-col">
+              <h3>Récapitulatif</h3>
+              <div class="recap-box" id="wiz-recap"></div>
+            </div>
+          </div>
         </div>
 
         <p class="wizard-error" id="wiz-error"></p>
@@ -682,12 +708,17 @@
     var form = document.getElementById('devis-form');
     if(!form) return;
 
-    var PRICES = { Riviera: '59 €', Signature: '89 €', Prestige: '119 €' };
+    var PRICE_VALUES = { Riviera: 59, Signature: 89, Prestige: 119 };
     var CALENDLY_URLS = {
       Riviera: 'https://calendly.com/raphwash/riviera',
       Signature: 'https://calendly.com/raphwash/signature',
       Prestige: 'https://calendly.com/raphwash/prestige'
     };
+    function formatEuro(n){
+      var rounded = Math.round(n * 100) / 100;
+      var isInt = Math.abs(rounded - Math.round(rounded)) < 0.001;
+      return (isInt ? rounded.toFixed(0) : rounded.toFixed(2).replace('.', ',')) + ' €';
+    }
     function getTimeSlots(dow){
       var startH = (dow === 0) ? 9 : 8;
       var endH = (dow === 0) ? 19 : 20;
@@ -715,7 +746,8 @@
     var weekRangeEl = document.getElementById('week-range');
     var weekPrevBtn = document.getElementById('week-prev');
     var weekNextBtn = document.getElementById('week-next');
-    var calendlyCta = document.getElementById('calendly-cta');
+    var bookingCta = document.getElementById('booking-cta');
+    var depositAmountEl = document.getElementById('deposit-amount');
 
     function capitalize(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
 
@@ -758,7 +790,7 @@
             state.date = iso;
             state.dateLabel = full;
             state.heure = t;
-            updateCalendlyCta();
+            updateBookingCta();
           });
           slots.appendChild(btn);
         });
@@ -767,11 +799,10 @@
       }
     }
 
-    function updateCalendlyCta(){
+    function updateBookingCta(){
       var ready = !!(state.date && state.heure);
-      calendlyCta.classList.toggle('ready', ready);
-      var baseUrl = CALENDLY_URLS[state.formule] || CALENDLY_URLS.Riviera;
-      calendlyCta.href = baseUrl;
+      bookingCta.classList.toggle('ready', ready);
+      bookingCta.href = CALENDLY_URLS[state.formule] || CALENDLY_URLS.Riviera;
     }
 
     weekPrevBtn.addEventListener('click', function(){
@@ -810,7 +841,7 @@
       panels.forEach(function(p){ p.hidden = (parseInt(p.dataset.step, 10) !== n); });
       backBtn.style.visibility = (n === 1) ? 'hidden' : 'visible';
       nextBtn.hidden = (n === totalSteps);
-      if (n === totalSteps){ buildRecap(); buildDays(); updateCalendlyCta(); }
+      if (n === totalSteps){ buildRecap(); buildDays(); updateBookingCta(); }
       errorEl.classList.remove('show');
       updateStepper();
     }
@@ -819,14 +850,19 @@
       var vehicule = form.querySelector('#f-vehicule').value.trim();
       var type = form.querySelector('#f-type').value;
       var cp = form.querySelector('#f-cp').value.trim();
+      var price = state.formule ? PRICE_VALUES[state.formule] : null;
+      var deposit = price ? price * 0.10 : null;
       var rows = [
-        ['Formule', state.formule ? state.formule + ' — ' + PRICES[state.formule] : '—'],
+        ['Formule', state.formule ? state.formule + ' — ' + formatEuro(price) : '—'],
         ['Véhicule', (vehicule || '—') + (type ? ' (' + type + ')' : '')],
-        ['Lieu', cp || '—']
+        ['Lieu', cp || '—'],
+        ['Prix total du lavage', price ? formatEuro(price) : '—']
       ];
       recapEl.innerHTML = rows.map(function(r){
         return '<div class="recap-row"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>';
-      }).join('');
+      }).join('')
+        + '<div class="recap-row recap-highlight"><span>Acompte à régler aujourd\'hui</span><span>' + (deposit ? formatEuro(deposit) : '—') + '</span></div>';
+      if (depositAmountEl) depositAmountEl.textContent = deposit ? formatEuro(deposit) : '—';
     }
 
     function showError(msg){
