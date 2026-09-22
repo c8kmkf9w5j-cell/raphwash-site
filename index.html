@@ -67,7 +67,7 @@
   header.scrolled .nav{padding-block:0;}
   .brand{display:flex;align-items:center;}
   .brand img{height:132px;width:auto;display:block;mix-blend-mode:screen;}
-  .nav-links{display:none;gap:34px;list-style:none;margin:0;padding:0;font-size:14.5px;font-weight:600;}
+  .nav-links{display:none;gap:22px;list-style:none;margin:0;padding:0;font-size:14px;font-weight:600;flex-wrap:wrap;}
   @media (min-width:860px){ .nav-links{display:flex;} }
   .nav-links a{text-decoration:none;color:var(--text-muted);transition:color .15s;}
   .nav-links a:hover{color:var(--text);}
@@ -102,25 +102,17 @@
     position:relative;padding-block:64px 72px;overflow:hidden;
     border-bottom:1px solid var(--border);
     background:
-      radial-gradient(820px 460px at 12% -8%, rgba(47,168,217,.22), transparent 60%),
-      radial-gradient(640px 380px at 92% 6%, rgba(201,164,92,.16), transparent 55%),
       repeating-linear-gradient(0deg, rgba(245,245,242,.035) 0 1px, transparent 1px 62px),
       repeating-linear-gradient(90deg, rgba(245,245,242,.035) 0 1px, transparent 1px 62px),
       var(--bg);
   }
-  .hero-spotlight{
-    position:absolute;inset:-15%;pointer-events:none;mix-blend-mode:screen;
-    background:radial-gradient(480px 480px at var(--mx,50%) var(--my,32%), rgba(201,164,92,.24), transparent 68%);
-    transition:background .25s ease;
+  .hero::before{
+    content:"";position:absolute;top:-30%;left:-15%;width:70%;height:80%;pointer-events:none;
+    background:radial-gradient(circle, rgba(47,168,217,.35), transparent 65%);
+    animation:heroGlowBreathe 4.5s ease-in-out infinite;
   }
-  @media (hover:none){
-    .hero-spotlight{animation:driftSpot 8s ease-in-out infinite;}
-  }
-  @keyframes driftSpot{
-    0%{transform:translate(-8%,-5%);}
-    50%{transform:translate(8%,5%);}
-    100%{transform:translate(-8%,-5%);}
-  }
+  @keyframes heroGlowBreathe{0%,100%{opacity:.55;transform:scale(.92);}50%{opacity:1;transform:scale(1.08);}}
+  @media (prefers-reduced-motion:reduce){ .hero::before{animation:none;opacity:.8;} }
   .hero .wrap{position:relative;}
   .hero-grid{display:grid;gap:32px;align-items:center;margin-top:6px;}
   .hero h1{
@@ -160,9 +152,9 @@
   .head p{margin-top:16px;font-size:15.5px;}
 
   /* resultats avant/apres */
-  .ba-slider{margin-top:6px;}
+  .ba-slider{margin-top:6px;max-width:720px;margin-inline:auto;}
   .ba-stage{
-    position:relative;width:100%;aspect-ratio:16/10;border-radius:18px;overflow:hidden;
+    position:relative;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;
     border:1px solid var(--border);box-shadow:var(--shadow-card);background:var(--surface-2);
     touch-action:none;user-select:none;-webkit-user-select:none;cursor:ew-resize;
   }
@@ -179,7 +171,7 @@
   .ba-handle::before{content:"";position:absolute;top:0;bottom:0;left:0;width:2px;background:linear-gradient(180deg,#7FE0FF,#F0C878);transform:translateX(-1px);}
   .ba-handle-grip{position:absolute;top:50%;left:0;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:var(--grad-blue);box-shadow:var(--glow-blue), 0 0 0 4px rgba(5,6,7,.45);display:flex;align-items:center;justify-content:center;color:#050607;}
   .ba-handle-grip svg{width:18px;height:18px;}
-  .ba-thumbs{display:flex;gap:14px;margin-top:20px;overflow-x:auto;padding-bottom:4px;}
+  .ba-thumbs{display:flex;gap:14px;margin-top:20px;overflow-x:auto;padding-bottom:4px;max-width:720px;margin-inline:auto;justify-content:center;}
   .ba-thumb{flex:none;display:flex;flex-direction:column;align-items:center;gap:7px;width:72px;background:none;border:none;padding:0;cursor:pointer;font-family:var(--sans);}
   .ba-thumb-img{width:66px;height:66px;border-radius:14px;overflow:hidden;border:2px solid transparent;opacity:.6;box-shadow:var(--shadow-chip);transition:border-color .2s ease,opacity .2s ease,box-shadow .2s ease;}
   .ba-thumb-img img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -192,6 +184,7 @@
   .svc-grid{display:grid;gap:16px;grid-template-columns:1fr;}
   @media (min-width:640px){ .svc-grid{grid-template-columns:repeat(2,1fr);} }
   @media (min-width:980px){ .svc-grid{grid-template-columns:repeat(3,1fr);} }
+  @media (min-width:640px){ .process .svc-grid, #services .svc-grid{grid-template-columns:repeat(auto-fit,minmax(240px,300px));justify-content:center;} }
   .svc{
     background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;
     display:grid;grid-template-columns:auto 1fr;column-gap:14px;row-gap:3px;align-items:start;
@@ -256,10 +249,10 @@
   /* zone */
   .zone{border-top:1px solid var(--border);}
   .zone-grid{display:grid;gap:34px;}
-  @media (min-width:640px){ .zone-grid{grid-template-columns:.85fr 1.15fr;align-items:center;} }
+  @media (min-width:640px){ .zone-grid{grid-template-columns:1.15fr .85fr;align-items:start;} }
   .split-grid{display:grid;gap:40px;}
   @media (min-width:760px){ .split-grid{grid-template-columns:1fr 1fr;align-items:start;} }
-  .zone-infocard{width:100%;max-width:300px;margin-inline:auto;border:1px solid var(--border);background:var(--surface);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow-card);}
+  .zone-infocard{width:100%;max-width:400px;margin-inline:auto;border:1px solid var(--border);background:var(--surface);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow-card);}
   .zone-infocard-head{display:flex;align-items:center;gap:12px;}
   .zone-infocard-icon{width:44px;height:44px;border-radius:12px;background:var(--grad-soft);border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow-chip);display:flex;align-items:center;justify-content:center;flex:none;}
   .zone-infocard-icon svg{width:22px;height:22px;color:var(--blue);}
@@ -270,8 +263,8 @@
   .zone-stat-row span:first-child{color:var(--text-muted);}
   .zone-stat-row span:last-child{font-weight:700;text-align:right;}
   .zone-list{display:flex;flex-direction:column;gap:16px;margin-top:24px;}
-  .zone-item{display:flex;gap:14px;align-items:flex-start;}
-  .zone-item svg{width:18px;height:18px;color:var(--blue);flex:none;margin-top:2px;}
+  .zone-item{display:flex;gap:14px;align-items:center;}
+  .zone-item svg{width:18px;height:18px;color:var(--blue);flex:none;}
   .zone-item p{font-size:14.5px;}
 
   /* trust */
@@ -329,6 +322,7 @@
   .step-node{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:9px;flex:1;min-width:0;}
   .step-circle{width:38px;height:38px;border-radius:50%;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-chip);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13.5px;color:var(--text-muted);transition:background .2s,border-color .2s,box-shadow .2s;}
   .step-node.active .step-circle{background:var(--grad-blue);color:#F5F5F2;border-color:transparent;box-shadow:0 0 0 6px rgba(47,168,217,.15), inset 0 1px 0 rgba(255,255,255,.35);}
+  .step-node.done{cursor:pointer;}
   .step-node.done .step-circle{background:var(--grad-gold);color:#050607;border-color:transparent;box-shadow:inset 0 1px 0 rgba(255,255,255,.4);}
   .step-node.done .step-circle svg{width:15px;height:15px;}
   .step-label{font-size:10.5px;font-weight:700;text-align:center;color:var(--text-muted);letter-spacing:.01em;line-height:1.3;padding-inline:2px;}
@@ -347,6 +341,9 @@
   .formule-card input{position:absolute;opacity:0;width:0;height:0;}
   .formule-card b{font-family:var(--display);text-transform:uppercase;font-size:17px;letter-spacing:.01em;}
   .formule-card span{font-size:13px;color:var(--text-muted);}
+  .formule-price{font-family:var(--display);font-size:15px;color:#7FE0FF;font-weight:400;animation:priceGlowBlue 3.4s ease-in-out infinite;}
+  .formule-price-gold{color:#F0C878;animation:priceGlowGold 3.4s ease-in-out infinite;}
+  @media (prefers-reduced-motion:reduce){ .formule-price{animation:none;} }
   .formule-card.selected{border-color:var(--blue);background:rgba(47,168,217,.1);box-shadow:var(--shadow-card-hover), 0 0 0 1px rgba(47,168,217,.3);}
 
   .day-tabs{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;}
@@ -401,7 +398,7 @@
   .wizard-error.show{display:block;}
 
   footer{border-top:1px solid var(--border);padding-block:40px;}
-  .foot-grid{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center;}
+  .foot-grid{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;align-items:center;}
   .foot-brand{display:flex;align-items:center;}
   .foot-brand img{height:30px;width:auto;display:block;mix-blend-mode:screen;}
   .foot-links{display:flex;gap:22px;list-style:none;padding:0;margin:0;font-size:13px;color:var(--text-muted);flex-wrap:wrap;}
@@ -454,7 +451,10 @@
   <div class="wrap nav">
     <a href="#" class="brand" aria-label="Retour à l'accueil"><img src="assets/raphwash-logo.png" alt="RaphWash"></a>
     <ul class="nav-links">
+      <li><a href="#hero">Accueil</a></li>
       <li><a href="#services">Prestations</a></li>
+      <li><a href="#tarifs">Formules</a></li>
+      <li><a href="#resultats">Résultats</a></li>
       <li><a href="#avis">Avis</a></li>
       <li><a href="#faq">Faq</a></li>
     </ul>
@@ -463,7 +463,6 @@
 </header>
 
 <section class="hero" id="hero">
-  <div class="hero-spotlight" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-grid">
       <div>
@@ -544,22 +543,6 @@
 
 <section class="zone" id="zone">
   <div class="wrap zone-grid" data-reveal>
-    <div>
-      <div class="zone-infocard">
-        <div class="zone-infocard-head">
-          <div class="zone-infocard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
-          <div>
-            <b>Zone couverte</b>
-            <span>Saint-Raphaël &amp; Côte d'Azur</span>
-          </div>
-        </div>
-        <div>
-          <div class="zone-stat-row"><span>Ville de base</span><span>Saint-Raphaël</span></div>
-          <div class="zone-stat-row"><span>Rayon d'intervention</span><span>Côte d'Azur</span></div>
-          <div class="zone-stat-row"><span>Déplacement</span><span>Inclus, sans frais</span></div>
-        </div>
-      </div>
-    </div>
     <div class="head">
       <p class="eyebrow">Zone d'intervention</p>
       <h2>On vient à vous, sur toute la Côte d'Azur</h2>
@@ -576,6 +559,22 @@
         <div class="zone-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l2-7h14l2 7"/><path d="M5 13h14v5H5z"/><circle cx="8" cy="18" r="1.5"/><circle cx="16" cy="18" r="1.5"/></svg>
           <p>Un point d'eau et un accès à l'électricité à proximité suffisent, le reste du matériel est fourni.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="zone-infocard">
+        <div class="zone-infocard-head">
+          <div class="zone-infocard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+          <div>
+            <b>Zone couverte</b>
+            <span>Saint-Raphaël &amp; Côte d'Azur</span>
+          </div>
+        </div>
+        <div>
+          <div class="zone-stat-row"><span>Ville de base</span><span>Saint-Raphaël</span></div>
+          <div class="zone-stat-row"><span>Rayon d'intervention</span><span>Côte d'Azur</span></div>
+          <div class="zone-stat-row"><span>Déplacement</span><span>Inclus, sans frais</span></div>
         </div>
       </div>
     </div>
@@ -675,7 +674,7 @@
         <div class="plan-included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>Tout le pack Signature inclus</div>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V9a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v2"/><path d="M6 20h13a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-6"/><path d="M6 20v-3"/><path d="M9 6h4"/></svg>Injection / extraction sièges et tissus</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 3l1.5 4.7L18 9l-4.5 1.6L12 15l-1.5-4.4L6 9l4.5-1.3z"/></svg>Détachage approfondi</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.7L18 9l-4.5 1.6L12 15l-1.5-4.4L6 9l4.5-1.3z"/></svg>Détachage approfondi</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg>Traitement et nutrition cuir (si applicable)</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 10h16M4 14h16"/></svg>Détails, aérateurs et toutes les zones</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Finition haut de gamme avec parfum premium</li>
@@ -706,9 +705,9 @@
         <div class="step-panel" data-step="1">
           <div class="step-title">Étape 1 — Choisissez votre formule</div>
           <div class="formule-pick">
-            <label class="formule-card" data-formule-card="Riviera"><input type="radio" name="formule" value="Riviera"><b>Riviera</b><span>59 € — un intérieur propre et frais</span></label>
-            <label class="formule-card" data-formule-card="Signature"><input type="radio" name="formule" value="Signature"><b>Signature</b><span>89 € — le soin du détail</span></label>
-            <label class="formule-card" data-formule-card="Prestige"><input type="radio" name="formule" value="Prestige"><b>Prestige</b><span>119 € — l'excellence sans compromis</span></label>
+            <label class="formule-card" data-formule-card="Riviera"><input type="radio" name="formule" value="Riviera"><b>Riviera</b><span><b class="formule-price">59 €</b> — un intérieur propre et frais</span></label>
+            <label class="formule-card" data-formule-card="Signature"><input type="radio" name="formule" value="Signature"><b>Signature</b><span><b class="formule-price formule-price-gold">89 €</b> — le soin du détail</span></label>
+            <label class="formule-card" data-formule-card="Prestige"><input type="radio" name="formule" value="Prestige"><b>Prestige</b><span><b class="formule-price">119 €</b> — l'excellence sans compromis</span></label>
           </div>
         </div>
 
@@ -803,6 +802,14 @@
         <p>Oui, prévenez-nous au moins 24h à l'avance pour reporter votre créneau sans frais.</p>
       </details>
       <details class="faq-item">
+        <summary>Que se passe-t-il après le paiement de l'acompte ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p>Après le paiement de l'acompte, vous pouvez poursuivre avec la dernière étape et réserver votre créneau directement via notre Calendly intégré au site. Vous recevrez également un e-mail contenant le lien vers notre Calendly, pour le consulter à tout moment.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Comment puis-je réserver un créneau ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p>Pour réserver un créneau, cliquez sur le bouton « Réserver maintenant » en haut de la page. Vous pourrez alors choisir votre formule, puis payer un acompte de 10% pour garantir votre réservation.</p>
+      </details>
+      <details class="faq-item">
         <summary>Intervenez-vous sur tous les types de véhicules ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
         <p>Citadines, berlines, SUV et utilitaires légers. Pour les véhicules plus volumineux (vans, camping-cars), contactez-nous pour un devis adapté.</p>
       </details>
@@ -812,17 +819,6 @@
 
 <section id="horaires">
   <div class="wrap split-grid" data-reveal>
-    <div>
-      <div class="head" data-reveal>
-        <p class="eyebrow">Horaires</p>
-        <h2>Nos disponibilités</h2>
-        <p>Interventions sur rendez-vous, en semaine comme le week-end.</p>
-      </div>
-      <div class="hours-card" data-reveal>
-        <div class="hours-row"><span>Lundi – Samedi</span><b>8h00 – 20h00</b></div>
-        <div class="hours-row"><span>Dimanche</span><b>9h00 – 19h00</b></div>
-      </div>
-    </div>
     <div id="contact">
       <div class="head" data-reveal>
         <p class="eyebrow">Contact</p>
@@ -846,12 +842,22 @@
         </div>
       </div>
     </div>
+    <div>
+      <div class="head" data-reveal>
+        <p class="eyebrow">Horaires</p>
+        <h2>Nos disponibilités</h2>
+        <p>Interventions sur rendez-vous, en semaine comme le week-end.</p>
+      </div>
+      <div class="hours-card" data-reveal>
+        <div class="hours-row"><span>Lundi – Samedi</span><b>8h00 – 20h00</b></div>
+        <div class="hours-row"><span>Dimanche</span><b>9h00 – 19h00</b></div>
+      </div>
+    </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap foot-grid">
-    <div class="foot-brand"><img src="assets/raphwash-logo.png" alt="RaphWash"></div>
     <ul class="foot-links">
       <li><a href="#services">Prestations</a></li>
       <li><a href="#tarifs">Formules</a></li>
@@ -1036,6 +1042,16 @@
       errorEl.classList.remove('show');
       updateStepper();
     }
+
+    stepper.querySelectorAll('.step-node').forEach(function(node){
+      node.addEventListener('click', function(){
+        var n = parseInt(node.dataset.node, 10);
+        if (n < currentStep){
+          currentStep = n;
+          showStep(currentStep);
+        }
+      });
+    });
 
     function buildRecap(){
       var vehicule = form.querySelector('#f-vehicule').value.trim();
@@ -1271,19 +1287,6 @@
       revealEls.forEach(function(el){ io.observe(el); });
     } else {
       revealEls.forEach(function(el){ el.classList.add('is-visible'); });
-    }
-
-    /* ---- hero cursor spotlight ---- */
-    var hero = document.getElementById('hero');
-    var spotlight = hero && hero.querySelector('.hero-spotlight');
-    if (hero && spotlight && !reduceMotion && matchMedia('(hover: hover)').matches){
-      hero.addEventListener('mousemove', function(e){
-        var r = hero.getBoundingClientRect();
-        var mx = ((e.clientX - r.left) / r.width) * 100;
-        var my = ((e.clientY - r.top) / r.height) * 100;
-        spotlight.style.setProperty('--mx', mx + '%');
-        spotlight.style.setProperty('--my', my + '%');
-      });
     }
 
     /* ---- magnetic buttons ---- */
