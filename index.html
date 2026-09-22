@@ -63,10 +63,9 @@
     background:rgba(8,7,12,.78);backdrop-filter:blur(12px);
     border-bottom:1px solid var(--border);
   }
-  .nav{display:flex;align-items:center;justify-content:space-between;padding-block:8px;gap:20px;transition:padding-block .25s var(--ease-lift);}
-  header.scrolled .nav{padding-block:0;}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding-block:8px;gap:20px;}
   .brand{display:flex;align-items:center;}
-  .brand img{height:132px;width:auto;display:block;mix-blend-mode:screen;}
+  .brand img{height:76px;width:auto;display:block;}
   .nav-links{display:none;gap:34px;list-style:none;margin:0;padding:0;font-size:14.5px;font-weight:600;}
   @media (min-width:860px){ .nav-links{display:flex;} }
   .nav-links a{text-decoration:none;color:var(--text-muted);transition:color .15s;}
@@ -403,7 +402,7 @@
   footer{border-top:1px solid var(--border);padding-block:40px;}
   .foot-grid{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center;}
   .foot-brand{display:flex;align-items:center;}
-  .foot-brand img{height:30px;width:auto;display:block;mix-blend-mode:screen;}
+  .foot-brand img{height:30px;width:auto;display:block;}
   .foot-links{display:flex;gap:22px;list-style:none;padding:0;margin:0;font-size:13px;color:var(--text-muted);flex-wrap:wrap;}
   .foot-links a{text-decoration:none;color:var(--text-muted);}
   .foot-links a:hover{color:var(--blue);}
@@ -1246,16 +1245,6 @@
 <script>
   (function(){
     var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    /* ---- shrink header on scroll ---- */
-    var siteHeader = document.querySelector('header');
-    if (siteHeader){
-      function updateHeaderScrolled(){
-        siteHeader.classList.toggle('scrolled', window.scrollY > 30);
-      }
-      updateHeaderScrolled();
-      window.addEventListener('scroll', updateHeaderScrolled, { passive: true });
-    }
 
     /* ---- scroll reveal ---- */
     var revealEls = document.querySelectorAll('[data-reveal]');
