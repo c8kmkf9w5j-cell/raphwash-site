@@ -1,6 +1,4 @@
-<!doctype html>
-<html lang="fr">
-<head>
+<!doctype html><html lang="fr"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RaphWash</title>
@@ -334,6 +332,12 @@
   .form-note{font-size:12.5px;color:var(--text-muted);}
   form .btn{width:100%;}
 
+  .autocomplete-wrap{position:relative;}
+  .autocomplete-list{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:40;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow-card);max-height:220px;overflow-y:auto;display:none;}
+  .autocomplete-list.show{display:block;}
+  .autocomplete-item{padding:10px 13px;font-size:13.5px;cursor:pointer;}
+  .autocomplete-item:hover,.autocomplete-item.active{background:var(--surface-2);color:var(--blue);}
+
   /* stepper */
   .stepper{position:relative;display:flex;justify-content:space-between;gap:6px;margin-bottom:36px;}
   .stepper::before{content:"";position:absolute;top:19px;left:6%;right:6%;height:1px;background:var(--border);z-index:0;}
@@ -429,8 +433,7 @@
 
   .brand img, .foot-brand img{ mix-blend-mode:screen !important; }
 </style>
-</head>
-<body>
+</head><body>
 <noscript><style>[data-reveal]{opacity:1!important;transform:none!important;}</style></noscript>
 
 <header>
@@ -720,7 +723,10 @@
           <div class="row2">
             <div class="field">
               <label for="f-vehicule">Véhicule (marque / modèle)</label>
-              <input id="f-vehicule" name="vehicule" type="text" placeholder="Ex. Peugeot 308">
+              <div class="autocomplete-wrap">
+                <input id="f-vehicule" name="vehicule" type="text" placeholder="Ex. Peugeot 308" autocomplete="off">
+                <div class="autocomplete-list" id="vehicule-suggest"></div>
+              </div>
             </div>
             <div class="field">
               <label for="f-type">Type de véhicule</label>
@@ -728,6 +734,7 @@
                 <option value="Citadine">Citadine</option>
                 <option value="Berline">Berline</option>
                 <option value="SUV">SUV</option>
+                <option value="Sportive">Sportive</option>
                 <option value="Utilitaire léger">Utilitaire léger</option>
                 <option value="Autre">Autre (précisez en message)</option>
               </select>
@@ -735,7 +742,10 @@
           </div>
           <div class="field">
             <label for="f-cp">Ville / code postal</label>
-            <input id="f-cp" name="cp" type="text" placeholder="Ex. Saint-Raphaël, 83700">
+            <div class="autocomplete-wrap">
+              <input id="f-cp" name="cp" type="text" placeholder="Ex. Saint-Raphaël, 83700" autocomplete="off">
+              <div class="autocomplete-list" id="cp-suggest"></div>
+            </div>
           </div>
         </div>
 
@@ -926,6 +936,264 @@
         }
       })();
     }
+
+    var VEHICLES = [
+      'Renault Twingo','Renault Clio','Renault Captur','Renault Mégane','Renault Scénic','Renault Kadjar','Renault Austral','Renault Espace','Renault Arkana','Renault Talisman','Renault Kangoo','Renault Trafic','Renault Master','Renault Zoe','Renault Twizy','Renault Laguna','Renault Vel Satis','Renault Modus','Renault Wind','Renault Koleos','Renault Latitude','Renault Fluence','Renault Symbol','Renault Express','Renault Rafale','Renault Grand Koleos','Renault 4','Renault 4 E-Tech','Renault R4','Renault 5','Renault 5 E-Tech','Renault R5','Renault Safrane','Renault Extra','Renault 19','Renault 21','Renault 25','Renault Alaskan',
+      'Peugeot 106','Peugeot 107','Peugeot 108','Peugeot 205','Peugeot 206','Peugeot 207','Peugeot 208','Peugeot 2008','Peugeot 305','Peugeot 306','Peugeot 307','Peugeot 308','Peugeot 3008','Peugeot 405','Peugeot 406','Peugeot 407','Peugeot 408','Peugeot 508','Peugeot 5008','Peugeot 605','Peugeot 607','Peugeot 806','Peugeot 807','Peugeot 1007','Peugeot RCZ','Peugeot 4007','Peugeot 4008','Peugeot iOn','Peugeot e-208','Peugeot e-2008','Peugeot Partner','Peugeot Rifter','Peugeot Traveller','Peugeot Expert','Peugeot Boxer',
+      'Citroën AX','Citroën Saxo','Citroën ZX','Citroën Xantia','Citroën Xsara','Citroën Xsara Picasso','Citroën C1','Citroën C2','Citroën C3','Citroën C3 Aircross','Citroën C3 Picasso','Citroën C4','Citroën C4 Picasso','Citroën C4 Cactus','Citroën C4 X','Citroën C5','Citroën C5 Aircross','Citroën C5 X','Citroën C6','Citroën C8','Citroën C15','Citroën C-Zero','Citroën Ami','Citroën Berlingo','Citroën SpaceTourer','Citroën Jumpy','Citroën Jumper',
+      'Fiat 500','Fiat 500X','Fiat 500L','Fiat 500e','Fiat 600','Fiat Panda','Fiat Tipo','Fiat Punto','Fiat Bravo','Fiat Stilo','Fiat Multipla','Fiat Croma','Fiat Sedici','Fiat Freemont','Fiat Doblo','Fiat Qubo','Fiat Talento','Fiat Ducato',
+      'Jeep Renegade','Jeep Compass','Jeep Avenger','Jeep Wrangler','Jeep Grand Cherokee','Jeep Cherokee','Jeep Gladiator','Jeep Patriot',
+      'Alfa Romeo MiTo','Alfa Romeo Giulietta','Alfa Romeo Giulia','Alfa Romeo Stelvio','Alfa Romeo Tonale','Alfa Romeo 147','Alfa Romeo 156','Alfa Romeo 159','Alfa Romeo Brera','Alfa Romeo GT','Alfa Romeo 4C','Alfa Romeo Spider','Alfa Romeo 166',
+      'DS 3','DS 3 Crossback','DS 4','DS 4 Crossback','DS 5','DS 7','DS 7 Crossback','DS 9',
+      'Nissan Micra','Nissan Note','Nissan Pulsar','Nissan Almera','Nissan Primera','Nissan Juke','Nissan Qashqai','Nissan X-Trail','Nissan Ariya','Nissan Leaf','Nissan Townstar','Nissan Navara','Nissan NV200','Nissan Primastar','Nissan Interstar','Nissan 370Z','Nissan GT-R',
+      'Toyota Aygo','Toyota Aygo X','Toyota Yaris','Toyota Yaris Cross','Toyota Corolla','Toyota Auris','Toyota Avensis','Toyota Verso','Toyota C-HR','Toyota RAV4','Toyota Camry','Toyota Prius','Toyota Highlander','Toyota Land Cruiser','Toyota Proace','Toyota Proace City','Toyota GT86','Toyota Supra','Toyota Hilux','Toyota bZ4X','Toyota Mirai',
+      'BMW Série 1','BMW Série 2','BMW Série 3','BMW Série 4','BMW Série 5','BMW Série 6','BMW Série 7','BMW Série 8','BMW X1','BMW X2','BMW X3','BMW X4','BMW X5','BMW X6','BMW X7','BMW Z4','BMW i3','BMW i4','BMW i5','BMW i7','BMW i8','BMW iX','BMW iX1','BMW iX2','BMW iX3','BMW M2','BMW M3','BMW M4','BMW M5',
+      'Mercedes Classe A','Mercedes Classe B','Mercedes Classe C','Mercedes Classe E','Mercedes Classe S','Mercedes Classe G','Mercedes Classe V','Mercedes CLA','Mercedes CLS','Mercedes SLK','Mercedes SLC','Mercedes GLA','Mercedes GLB','Mercedes GLC','Mercedes GLE','Mercedes GLS','Mercedes EQA','Mercedes EQB','Mercedes EQC','Mercedes EQE','Mercedes EQS','Mercedes AMG GT','Mercedes Citan','Mercedes Vito','Mercedes Sprinter',
+      'Audi A1','Audi A3','Audi A4','Audi A5','Audi A6','Audi A7','Audi A8','Audi Q2','Audi Q3','Audi Q4 e-tron','Audi Q5','Audi Q7','Audi Q8','Audi e-tron','Audi TT','Audi R8','Audi S3','Audi S4','Audi RS3','Audi RS4','Audi RS6',
+      'Volkswagen Up','Volkswagen Polo','Volkswagen Golf','Volkswagen Jetta','Volkswagen Beetle','Volkswagen Scirocco','Volkswagen Arteon','Volkswagen T-Roc','Volkswagen T-Cross','Volkswagen Taigo','Volkswagen Tiguan','Volkswagen Touran','Volkswagen Touareg','Volkswagen Sharan','Volkswagen Passat','Volkswagen Caddy','Volkswagen Transporter','Volkswagen Amarok','Volkswagen ID.3','Volkswagen ID.4','Volkswagen ID.5','Volkswagen ID.7','Volkswagen ID. Buzz',
+      'Skoda Citigo','Skoda Fabia','Skoda Rapid','Skoda Scala','Skoda Kamiq','Skoda Yeti','Skoda Karoq','Skoda Octavia','Skoda Kodiaq','Skoda Superb','Skoda Roomster','Skoda Enyaq',
+      'Cupra Leon','Cupra Formentor','Cupra Ateca','Cupra Born','Cupra Tavascan','Cupra Terramar',
+      'Seat Mii','Seat Ibiza','Seat Toledo','Seat Altea','Seat Exeo','Seat Arona','Seat Leon','Seat Ateca','Seat Tarraco','Seat Alhambra',
+      'Lancia Ypsilon','Lancia Delta','Lancia Thema','Lancia Musa','Lancia Phedra','Lancia Lybra','Lancia Thesis','Lancia Voyager',
+      'Honda Jazz','Honda Civic','Honda Accord','Honda Insight','Honda CR-V','Honda HR-V','Honda ZR-V','Honda e','Honda NSX',
+      'BYD Atto 3','BYD Dolphin','BYD Seal','BYD Seal U','BYD Sealion','BYD Han','BYD Tang','BYD Yuan Plus',
+      'Xpeng G3','Xpeng G6','Xpeng G9','Xpeng P5','Xpeng P7',
+      'Tesla Model 3','Tesla Model Y','Tesla Model S','Tesla Model X','Tesla Cybertruck',
+      'Ferrari Roma','Ferrari Portofino','Ferrari California','Ferrari 296','Ferrari SF90','Ferrari 812','Ferrari F8 Tributo','Ferrari 458','Ferrari 488','Ferrari Purosangue','Ferrari GTC4Lusso',
+      'Maserati Ghibli','Maserati Quattroporte','Maserati Levante','Maserati Grecale','Maserati GranTurismo','Maserati GranCabrio','Maserati MC20',
+      'Porsche Macan','Porsche Cayenne','Porsche Panamera','Porsche 911','Porsche Taycan','Porsche Boxster','Porsche Cayman','Porsche 718',
+      'Lamborghini Huracán','Lamborghini Urus','Lamborghini Aventador','Lamborghini Revuelto',
+      'McLaren 570S','McLaren 600LT','McLaren 720S','McLaren 765LT','McLaren GT','McLaren Artura',
+      'Mini Cooper','Mini Cooper SE','Mini Countryman','Mini Clubman','Mini Cabrio','Mini Aceman','Mini John Cooper Works',
+      'Dacia Sandero','Dacia Duster','Dacia Jogger','Dacia Spring','Dacia Logan',
+      'Opel Corsa','Opel Crossland','Opel Mokka','Opel Astra','Opel Grandland','Opel Combo',
+      'Ford Fiesta','Ford Focus','Ford Puma','Ford Kuga','Ford Mustang','Ford Ranger','Ford Mondeo','Ford Ka','Ford Transit','Ford Transit Connect','Ford Transit Custom',
+      'Hyundai i10','Hyundai i20','Hyundai i30','Hyundai Kona','Hyundai Tucson','Hyundai Santa Fe','Hyundai Ioniq 5',
+      'Kia Picanto','Kia Rio','Kia Stonic','Kia Ceed','Kia Sportage','Kia Niro','Kia Sorento','Kia EV6',
+      'Volvo XC40','Volvo XC60','Volvo XC90','Volvo V60','Volvo V90',
+      'Mazda 2','Mazda 3','Mazda CX-3','Mazda CX-5','Mazda CX-30',
+      'Suzuki Swift','Suzuki Vitara','Suzuki S-Cross','Suzuki Jimny',
+      'Land Rover Evoque','Land Rover Discovery Sport','Land Rover Defender','Range Rover Sport',
+      'Smart Fortwo','Smart Forfour',
+      'Lexus CT','Lexus NX','Lexus RX',
+      'Mitsubishi Space Star','Mitsubishi ASX','Mitsubishi Outlander',
+      'Subaru XV','Subaru Forester',
+      'Jaguar E-Pace','Jaguar F-Pace'
+    ];
+
+    var VILLES = [
+      'Saint-Raphaël, 83700','Fréjus, 83600','Sainte-Maxime, 83120','Saint-Tropez, 83990','Roquebrune-sur-Argens, 83520','Les Issambres, 83380','Puget-sur-Argens, 83480','Le Muy, 83490','Draguignan, 83300','Les Arcs, 83460','Vidauban, 83550','Le Luc, 83340',
+      'Cavalaire-sur-Mer, 83240','La Croix-Valmer, 83420','Gassin, 83580','Ramatuelle, 83350','Cogolin, 83310','Grimaud, 83310','La Garde-Freinet, 83680','Le Lavandou, 83980','Bormes-les-Mimosas, 83230',
+      'Hyères, 83400','La Londe-les-Maures, 83250','Toulon, 83000','La Seyne-sur-Mer, 83500','Six-Fours-les-Plages, 83140','Sanary-sur-Mer, 83110','Bandol, 83150','La Valette-du-Var, 83160','La Garde, 83130','Ollioules, 83190','Solliès-Pont, 83210','Carqueiranne, 83320','Le Pradet, 83220',
+      'Mandelieu-la-Napoule, 06210','Théoule-sur-Mer, 06590','Cannes, 06400','Le Cannet, 06110','Mougins, 06250','Vallauris, 06220','Golfe-Juan, 06220','Antibes, 06600','Juan-les-Pins, 06160','Biot, 06410','Valbonne, 06560','Sophia Antipolis, 06560','Grasse, 06130',
+      'Cagnes-sur-Mer, 06800','Villeneuve-Loubet, 06270','Saint-Laurent-du-Var, 06700','Nice, 06000','Saint-Jean-Cap-Ferrat, 06230','Villefranche-sur-Mer, 06230','Beaulieu-sur-Mer, 06310','Èze, 06360','Cap-d\'Ail, 06320','Monaco, 98000',
+      'Roquebrune-Cap-Martin, 06190','Menton, 06500','Vence, 06140','Saint-Paul-de-Vence, 06570','Carros, 06510','Le Bar-sur-Loup, 06620',
+      'Bagnols-en-Forêt, 83600','Callian, 83440','Fayence, 83440','Montauroux, 83440','Tanneron, 83440','Seillans, 83440','Mons, 83440','Tourrettes, 83440','Saint-Paul-en-Forêt, 83440',
+      'Callas, 83830','Bargemon, 83830','Claviers, 83830','Figanières, 83830','Trans-en-Provence, 83720','Flayosc, 83780','Lorgues, 83510','Taradeau, 83460','Le Thoronet, 83340',
+      'Cabasse, 83340','Carcès, 83570','Besse-sur-Issole, 83890','Gonfaron, 83590','Pignans, 83790','La Farlède, 83210','Solliès-Toucas, 83210','Cuers, 83390','Puget-Ville, 83390','Collobrières, 83610',
+      'Tourrettes-sur-Loup, 06140','Gourdon, 06620','Saint-Cézaire-sur-Siagne, 06530','Opio, 06650','Châteauneuf-Grasse, 06740','Le Rouret, 06650','Roquefort-les-Pins, 06330','La Colle-sur-Loup, 06480',
+      'Peymeinade, 06530','Mouans-Sartoux, 06370','Spéracèdes, 06530','Cabris, 06530','Saint-Vallier-de-Thiey, 06460','Peille, 06440','Peillon, 06440','La Turbie, 06320','Coaraze, 06390',
+      'Levens, 06670','Falicon, 06950','Aspremont, 06790','Gattières, 06510','Saint-Jeannet, 06640','La Gaude, 06610','Tourrette-Levens, 06690'
+    ];
+
+    var TYPE_CITADINE = [
+      'Renault Twingo','Renault Clio','Renault Zoe','Renault Twizy','Renault 5','Renault 5 E-Tech','Renault R5','Renault 4','Renault 4 E-Tech','Renault R4',
+      'Peugeot 106','Peugeot 107','Peugeot 108','Peugeot 205','Peugeot 206','Peugeot 207','Peugeot 208','Peugeot e-208','Peugeot iOn','Peugeot 1007',
+      'Citroën AX','Citroën Saxo','Citroën C1','Citroën C2','Citroën C3','Citroën C3 Picasso','Citroën C-Zero','Citroën Ami',
+      'Fiat 500','Fiat 500L','Fiat 500e','Fiat Panda','Fiat Punto',
+      'Alfa Romeo MiTo','DS 3',
+      'Toyota Aygo','Toyota Aygo X','Toyota Yaris',
+      'Volkswagen Up','Volkswagen Polo',
+      'Skoda Citigo','Skoda Fabia',
+      'Seat Mii','Seat Ibiza',
+      'Lancia Ypsilon',
+      'Honda Jazz','Honda e',
+      'Audi A1',
+      'Hyundai i10','Hyundai i20',
+      'Kia Picanto','Kia Rio',
+      'Mazda 2',
+      'Suzuki Swift',
+      'Smart Fortwo','Smart Forfour',
+      'Mini Cooper','Mini Cooper SE','Mini Aceman','Mini John Cooper Works',
+      'BYD Dolphin',
+      'Nissan Micra',
+      'Ford Fiesta',
+      'Opel Corsa'
+    ];
+
+    var TYPE_SUV = [
+      'Renault Captur','Renault Kadjar','Renault Austral','Renault Koleos','Renault Grand Koleos','Renault Espace','Renault Rafale',
+      'Peugeot 2008','Peugeot 3008','Peugeot 5008','Peugeot 4007','Peugeot 4008','Peugeot e-2008',
+      'Citroën C3 Aircross','Citroën C4 Cactus','Citroën C4 X','Citroën C5 Aircross',
+      'Fiat 500X','Fiat Sedici','Fiat Freemont','Fiat 600',
+      'Jeep Renegade','Jeep Compass','Jeep Avenger','Jeep Wrangler','Jeep Grand Cherokee','Jeep Cherokee','Jeep Patriot',
+      'Alfa Romeo Stelvio','Alfa Romeo Tonale',
+      'DS 3 Crossback','DS 4 Crossback','DS 7','DS 7 Crossback',
+      'Nissan Juke','Nissan Qashqai','Nissan X-Trail','Nissan Ariya',
+      'Toyota C-HR','Toyota RAV4','Toyota Highlander','Toyota Land Cruiser','Toyota bZ4X','Toyota Yaris Cross',
+      'BMW X1','BMW X2','BMW X3','BMW X4','BMW X5','BMW X6','BMW X7','BMW iX','BMW iX1','BMW iX2','BMW iX3',
+      'Mercedes Classe G','Mercedes GLA','Mercedes GLB','Mercedes GLC','Mercedes GLE','Mercedes GLS','Mercedes EQA','Mercedes EQB','Mercedes EQC',
+      'Audi Q2','Audi Q3','Audi Q4 e-tron','Audi Q5','Audi Q7','Audi Q8','Audi e-tron',
+      'Volkswagen T-Roc','Volkswagen T-Cross','Volkswagen Taigo','Volkswagen Tiguan','Volkswagen Touareg','Volkswagen ID.4','Volkswagen ID.5',
+      'Skoda Kamiq','Skoda Yeti','Skoda Karoq','Skoda Kodiaq','Skoda Enyaq',
+      'Cupra Formentor','Cupra Ateca','Cupra Tavascan','Cupra Terramar',
+      'Seat Arona','Seat Ateca','Seat Tarraco',
+      'Honda CR-V','Honda HR-V','Honda ZR-V',
+      'BYD Atto 3','BYD Seal U','BYD Sealion','BYD Tang','BYD Yuan Plus',
+      'Xpeng G3','Xpeng G6','Xpeng G9',
+      'Tesla Model X','Tesla Model Y',
+      'Dacia Duster',
+      'Opel Crossland','Opel Mokka','Opel Grandland',
+      'Ford Kuga','Ford Puma',
+      'Hyundai Kona','Hyundai Tucson','Hyundai Santa Fe','Hyundai Ioniq 5',
+      'Kia Stonic','Kia Sportage','Kia Niro','Kia Sorento','Kia EV6',
+      'Volvo XC40','Volvo XC60','Volvo XC90',
+      'Mazda CX-3','Mazda CX-5','Mazda CX-30',
+      'Suzuki Vitara','Suzuki S-Cross','Suzuki Jimny',
+      'Land Rover Evoque','Land Rover Discovery Sport','Land Rover Defender','Range Rover Sport',
+      'Lexus NX','Lexus RX',
+      'Mitsubishi ASX','Mitsubishi Outlander',
+      'Subaru XV','Subaru Forester',
+      'Jaguar E-Pace','Jaguar F-Pace',
+      'Porsche Macan','Porsche Cayenne',
+      'Maserati Levante','Maserati Grecale',
+      'Lamborghini Urus',
+      'Ferrari Purosangue',
+      'Mini Countryman'
+    ];
+
+    var TYPE_UTILITAIRE = [
+      'Renault Kangoo','Renault Trafic','Renault Master','Renault Express','Renault Alaskan','Renault Extra',
+      'Peugeot Partner','Peugeot Rifter','Peugeot Traveller','Peugeot Expert','Peugeot Boxer',
+      'Citroën Berlingo','Citroën SpaceTourer','Citroën Jumpy','Citroën Jumper','Citroën C15',
+      'Fiat Doblo','Fiat Qubo','Fiat Talento','Fiat Ducato',
+      'Nissan Townstar','Nissan Navara','Nissan NV200','Nissan Primastar','Nissan Interstar',
+      'Toyota Proace','Toyota Proace City','Toyota Hilux',
+      'Mercedes Citan','Mercedes Vito','Mercedes Sprinter',
+      'Volkswagen Caddy','Volkswagen Transporter','Volkswagen Amarok','Volkswagen ID. Buzz',
+      'Ford Transit','Ford Transit Connect','Ford Transit Custom','Ford Ranger',
+      'Jeep Gladiator',
+      'Tesla Cybertruck'
+    ];
+
+    var TYPE_SPORTIVE = [
+      'Renault Wind',
+      'BMW Z4','BMW i8','BMW M2',
+      'Audi TT','Audi R8',
+      'Peugeot RCZ',
+      'Alfa Romeo 4C','Alfa Romeo GT','Alfa Romeo Spider','Alfa Romeo Brera',
+      'Nissan 370Z','Nissan GT-R',
+      'Toyota GT86','Toyota Supra',
+      'Mercedes AMG GT','Mercedes SLK','Mercedes SLC',
+      'Volkswagen Scirocco',
+      'Porsche 911','Porsche Boxster','Porsche Cayman','Porsche 718',
+      'Ferrari Roma','Ferrari Portofino','Ferrari California','Ferrari 296','Ferrari SF90','Ferrari 812','Ferrari F8 Tributo','Ferrari 458','Ferrari 488','Ferrari GTC4Lusso',
+      'Lamborghini Huracán','Lamborghini Aventador','Lamborghini Revuelto',
+      'McLaren 570S','McLaren 600LT','McLaren 720S','McLaren 765LT','McLaren GT','McLaren Artura',
+      'Maserati MC20','Maserati GranTurismo','Maserati GranCabrio',
+      'Honda NSX',
+      'Mini Cabrio'
+    ];
+
+    var VEHICLE_TYPES = {};
+    VEHICLES.forEach(function(v){ VEHICLE_TYPES[v] = 'Berline'; });
+    TYPE_CITADINE.forEach(function(v){ VEHICLE_TYPES[v] = 'Citadine'; });
+    TYPE_SUV.forEach(function(v){ VEHICLE_TYPES[v] = 'SUV'; });
+    TYPE_UTILITAIRE.forEach(function(v){ VEHICLE_TYPES[v] = 'Utilitaire léger'; });
+    TYPE_SPORTIVE.forEach(function(v){ VEHICLE_TYPES[v] = 'Sportive'; });
+
+    function applyVehicleType(value){
+      var type = VEHICLE_TYPES[value];
+      if (!type){
+        var lower = value.trim().toLowerCase();
+        for (var i = 0; i < VEHICLES.length; i++){
+          if (VEHICLES[i].toLowerCase() === lower){ type = VEHICLE_TYPES[VEHICLES[i]]; break; }
+        }
+      }
+      if (type){
+        var typeSelect = document.getElementById('f-type');
+        if (typeSelect) typeSelect.value = type;
+      }
+    }
+
+    function setupAutocomplete(input, suggestEl, dataArr, onSelect){
+      var activeIndex = -1;
+
+      function hide(){
+        suggestEl.classList.remove('show');
+        suggestEl.innerHTML = '';
+        activeIndex = -1;
+      }
+
+      function render(matches){
+        suggestEl.innerHTML = matches.map(function(m, i){
+          return '<div class="autocomplete-item" data-index="' + i + '">' + m + '</div>';
+        }).join('');
+        suggestEl.classList.add('show');
+        activeIndex = -1;
+      }
+
+      input.addEventListener('input', function(){
+        var q = this.value.trim().toLowerCase();
+        if (q.length < 2){ hide(); return; }
+        var matches = dataArr.filter(function(v){ return v.toLowerCase().indexOf(q) !== -1; }).slice(0, 8);
+        if (!matches.length){ hide(); return; }
+        render(matches);
+      });
+
+      if (onSelect){
+        input.addEventListener('blur', function(){ onSelect(input.value); });
+      }
+
+      input.addEventListener('keydown', function(e){
+        var items = suggestEl.querySelectorAll('.autocomplete-item');
+        if (!items.length) return;
+        if (e.key === 'ArrowDown'){
+          e.preventDefault();
+          activeIndex = Math.min(activeIndex + 1, items.length - 1);
+        } else if (e.key === 'ArrowUp'){
+          e.preventDefault();
+          activeIndex = Math.max(activeIndex - 1, 0);
+        } else if (e.key === 'Enter'){
+          if (activeIndex >= 0){
+            e.preventDefault();
+            input.value = items[activeIndex].textContent;
+            hide();
+            if (onSelect) onSelect(input.value);
+          }
+          return;
+        } else if (e.key === 'Escape'){
+          hide();
+          return;
+        } else {
+          return;
+        }
+        items.forEach(function(it, i){ it.classList.toggle('active', i === activeIndex); });
+      });
+
+      suggestEl.addEventListener('pointerdown', function(e){
+        var item = e.target.closest('.autocomplete-item');
+        if (!item) return;
+        e.preventDefault();
+        input.value = item.textContent;
+        hide();
+        if (onSelect) onSelect(input.value);
+      });
+
+      document.addEventListener('click', function(e){
+        if (e.target !== input && !suggestEl.contains(e.target)){
+          hide();
+        }
+      });
+    }
+
+    var vehiculeInput = document.getElementById('f-vehicule');
+    var vehiculeSuggest = document.getElementById('vehicule-suggest');
+    if (vehiculeInput && vehiculeSuggest){ setupAutocomplete(vehiculeInput, vehiculeSuggest, VEHICLES, applyVehicleType); }
+
+    var cpInput = document.getElementById('f-cp');
+    var cpSuggest = document.getElementById('cp-suggest');
+    if (cpInput && cpSuggest){ setupAutocomplete(cpInput, cpSuggest, VILLES); }
 
     form.querySelectorAll('input[name="formule"]').forEach(function(r){
       r.addEventListener('change', function(){
@@ -1295,5 +1563,4 @@
     }
   })();
 </script>
-</body>
-</html>
+</body></html>
