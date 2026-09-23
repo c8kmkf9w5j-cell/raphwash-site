@@ -28,7 +28,8 @@
   }
 
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;max-width:100%;overflow-x:hidden;}
+  html{overflow-x:hidden;}
+  html,body{margin:0;padding:0;max-width:100%;}
   body{
     background:var(--bg);
     color:var(--text);
@@ -63,17 +64,22 @@
     background:rgba(8,7,12,.78);backdrop-filter:blur(12px);
     border-bottom:1px solid var(--border);
   }
-  .nav{display:flex;align-items:center;justify-content:space-between;padding-block:8px;gap:20px;transition:padding-block .25s var(--ease-lift);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding-block:8px;gap:10px;transition:padding-block .25s var(--ease-lift);}
+  @media (min-width:860px){ .nav{gap:20px;} }
   header.scrolled .nav{padding-block:0;}
   .brand{display:flex;align-items:center;flex:none;}
-  .brand img{height:56px;width:auto;display:block;mix-blend-mode:screen;}
+  .brand img{height:56px;width:auto;display:block;mix-blend-mode:screen;transform:scale(1.7);transform-origin:left center;}
+  @media (min-width:520px){ .brand img{height:64px;} }
   @media (min-width:860px){ .brand img{height:132px;} }
   .nav-links{display:none;gap:22px;list-style:none;margin:0;padding:0;font-size:14px;font-weight:600;flex-wrap:wrap;}
   @media (min-width:860px){ .nav-links{display:flex;} }
   .nav-links a{text-decoration:none;color:var(--text-muted);transition:color .15s;}
   .nav-links a:hover{color:var(--text);}
-  .nav-cta{display:none;white-space:nowrap;}
-  @media (min-width:640px){ .nav-cta{display:inline-flex;} }
+  .nav-cta{display:inline-flex;white-space:nowrap;padding:6px 10px;font-size:10.5px;flex:none;}
+  @media (min-width:860px){ .nav-cta{padding:9px 16px;font-size:12.5px;} }
+  .nav-cta-short{display:inline;}
+  .nav-cta-full{display:none;}
+  @media (min-width:860px){ .nav-cta-short{display:none;} .nav-cta-full{display:inline;} }
 
   .nav-toggle{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);cursor:pointer;flex:none;}
   .nav-toggle svg{width:20px;height:20px;}
@@ -438,7 +444,7 @@
       <li><a href="#avis">Avis</a></li>
       <li><a href="#faq">Faq</a></li>
     </ul>
-    <a href="#tarifs" class="btn btn-grad small nav-cta">Voir les tarifs et réserver</a>
+    <a href="#tarifs" class="btn btn-grad small nav-cta"><span class="nav-cta-short">Voir les tarifs</span><span class="nav-cta-full">Voir les tarifs et réserver</span></a>
     <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
