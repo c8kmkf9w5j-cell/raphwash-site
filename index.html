@@ -28,7 +28,7 @@
   }
 
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
+  html,body{margin:0;padding:0;max-width:100%;overflow-x:hidden;}
   body{
     background:var(--bg);
     color:var(--text);
@@ -65,14 +65,26 @@
   }
   .nav{display:flex;align-items:center;justify-content:space-between;padding-block:8px;gap:20px;transition:padding-block .25s var(--ease-lift);}
   header.scrolled .nav{padding-block:0;}
-  .brand{display:flex;align-items:center;}
-  .brand img{height:132px;width:auto;display:block;mix-blend-mode:screen;}
+  .brand{display:flex;align-items:center;flex:none;}
+  .brand img{height:56px;width:auto;display:block;mix-blend-mode:screen;}
+  @media (min-width:860px){ .brand img{height:132px;} }
   .nav-links{display:none;gap:22px;list-style:none;margin:0;padding:0;font-size:14px;font-weight:600;flex-wrap:wrap;}
   @media (min-width:860px){ .nav-links{display:flex;} }
   .nav-links a{text-decoration:none;color:var(--text-muted);transition:color .15s;}
   .nav-links a:hover{color:var(--text);}
   .nav-cta{display:none;white-space:nowrap;}
   @media (min-width:640px){ .nav-cta{display:inline-flex;} }
+
+  .nav-toggle{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);cursor:pointer;flex:none;}
+  .nav-toggle svg{width:20px;height:20px;}
+  @media (min-width:860px){ .nav-toggle{display:none;} }
+
+  .mobile-menu{border-top:1px solid var(--border);padding:18px 24px 24px;display:flex;flex-direction:column;gap:18px;}
+  .mobile-menu[hidden]{display:none;}
+  @media (min-width:860px){ .mobile-menu{display:none!important;} }
+  .mobile-menu-links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px;font-size:15.5px;font-weight:700;}
+  .mobile-menu-links a{text-decoration:none;color:var(--text);}
+  .mobile-menu .btn{width:100%;}
 
   .btn{
     display:inline-flex;align-items:center;justify-content:center;gap:9px;
@@ -346,43 +358,9 @@
   @media (prefers-reduced-motion:reduce){ .formule-price{animation:none;} }
   .formule-card.selected{border-color:var(--blue);background:rgba(47,168,217,.1);box-shadow:var(--shadow-card-hover), 0 0 0 1px rgba(47,168,217,.3);}
 
-  .day-tabs{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;}
-  .day-tab{flex:none;min-width:64px;border:1px solid var(--border);background:var(--surface-2);border-radius:10px;padding:8px 6px;text-align:center;cursor:pointer;}
-  .day-tab .dow{font-size:10.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;}
-  .day-tab .dom{font-size:14.5px;font-weight:800;margin-top:4px;}
-  .day-tab.selected{border-color:var(--blue);background:rgba(47,168,217,.12);}
-  .time-slots{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
-  .time-slot{border:1px solid var(--border);background:var(--surface-2);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;cursor:pointer;}
-  .time-slot.selected{background:var(--grad-blue);color:#F5F5F2;border-color:transparent;}
   .slot-note{margin-top:16px;font-size:12.5px;color:var(--text-muted);}
 
-  .avail-card{border:1px solid var(--border);background:var(--surface);border-radius:16px;padding:20px;margin-bottom:18px;box-shadow:var(--shadow-card);}
-  .avail-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;flex-wrap:wrap;}
-  .avail-title{display:flex;align-items:center;gap:9px;font-weight:800;font-size:14.5px;}
-  .avail-title svg{width:18px;height:18px;color:var(--blue);flex:none;}
-  .avail-nav{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--text-muted);font-weight:700;white-space:nowrap;}
-  .avail-nav button{width:28px;height:28px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);flex:none;}
-  .avail-nav button:hover:not(:disabled){border-color:var(--blue);}
-  .avail-nav button:disabled{opacity:.35;cursor:default;}
-  .avail-nav svg{width:13px;height:13px;}
-  .day-card{flex:none;min-width:116px;border:1px solid var(--border);border-radius:12px;padding:12px 10px;background:var(--surface-2);box-shadow:var(--shadow-card);}
-  .day-card .day-head{text-align:center;font-size:11.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.03em;margin-bottom:10px;}
-  .day-card .day-head b{display:block;font-size:14.5px;color:var(--text);font-weight:800;margin-top:2px;text-transform:none;letter-spacing:0;}
-  .day-slots{display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto;padding-right:2px;}
-  .day-slots::-webkit-scrollbar{width:5px;}
-  .day-slots::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
-  .day-slot{border:1px solid var(--border);border-radius:8px;padding:7px 4px;text-align:center;font-size:12.5px;font-weight:700;color:var(--blue);cursor:pointer;background:transparent;width:100%;font-family:var(--sans);}
-  .day-slot.selected{background:var(--grad-blue);color:#F5F5F2;border-color:transparent;}
-  .avail-cta{opacity:.45;pointer-events:none;transition:opacity .15s;}
-  .avail-cta.ready{opacity:1;pointer-events:auto;}
-
-  .deposit-grid{display:grid;gap:28px;grid-template-columns:1fr;margin-top:30px;}
-  @media (min-width:760px){ .deposit-grid{grid-template-columns:1fr 1fr;align-items:start;} }
-  .deposit-col h3{font-family:var(--display);text-transform:uppercase;font-size:clamp(18px,2.4vw,24px);line-height:1.1;margin-bottom:16px;}
-  .deposit-card{border:1px solid var(--gold);background:var(--grad-soft);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow-card), 0 0 0 1px rgba(201,164,92,.12);}
-  .deposit-amount{font-family:var(--display);text-transform:uppercase;font-size:15px;letter-spacing:.04em;color:var(--gold);}
-  .deposit-amount b{font-size:22px;}
-  .deposit-card p{font-size:13px;}
+  .calendly-card{border:1px solid var(--border);background:var(--surface);border-radius:16px;padding:10px;margin-top:18px;box-shadow:var(--shadow-card);overflow:hidden;}
   .secure-note{display:flex;align-items:center;gap:7px;font-size:12.5px;color:#7fd9a4;margin-top:14px;}
   .secure-note svg{width:14px;height:14px;flex:none;}
 
@@ -442,6 +420,8 @@
   @media (prefers-reduced-motion:reduce){
     [data-reveal]{opacity:1;transform:none;transition:none;}
   }
+
+  .brand img, .foot-brand img{ mix-blend-mode:screen !important; }
 </style>
 </head>
 <body>
@@ -459,6 +439,20 @@
       <li><a href="#faq">Faq</a></li>
     </ul>
     <a href="#tarifs" class="btn btn-grad small nav-cta">Voir les tarifs et réserver</a>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <ul class="mobile-menu-links">
+      <li><a href="#hero">Accueil</a></li>
+      <li><a href="#services">Prestations</a></li>
+      <li><a href="#tarifs">Formules</a></li>
+      <li><a href="#resultats">Résultats</a></li>
+      <li><a href="#avis">Avis</a></li>
+      <li><a href="#faq">Faq</a></li>
+    </ul>
+    <a href="#tarifs" class="btn btn-grad">Voir les tarifs et réserver</a>
   </div>
 </header>
 
@@ -468,7 +462,7 @@
       <div>
         <p class="eyebrow">Saint-Raphaël · Côte d'Azur — Detailing auto à domicile</p>
         <h1>Plus qu'un lavage,<span class="grad">une attention</span></h1>
-        <p class="lead">On se déplace jusqu'à vous, à Saint-Raphaël comme sur toute la Côte d'Azur. Résultats bluffants sur sièges, moquette et cuir, avec des produits professionnels, sans prise de tête.</p>
+        <p class="lead">On se déplace jusqu'à vous, à Saint-Raphaël comme sur toute la Côte d'Azur. Résultats bluffants sur sièges, moquette et cuir, avec des produits professionnels.</p>
         <div class="hero-actions">
           <a href="#reservation" class="btn btn-grad magnetic">Réserver maintenant →</a>
           <a href="#tarifs" class="btn-text">Voir les tarifs ↓</a>
@@ -483,7 +477,7 @@
     <div class="head" data-reveal>
       <p class="eyebrow">Résultats</p>
       <h2>Les résultats parlent d'eux-mêmes</h2>
-      <p>Fais glisser le curseur pour voir la transformation. Envoie-moi tes photos pour remplacer ces emplacements par tes vrais avant/après.</p>
+      <p>Faites glisser le curseur pour voir la transformation.</p>
     </div>
     <div class="ba-slider" data-reveal>
       <div class="ba-stage" id="ba-stage">
@@ -596,7 +590,7 @@
       <div class="svc">
         <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg></div>
         <h3>Produits professionnels</h3>
-        <p>Chaque matière — tissu, cuir, plastique — reçoit un produit adapté, jamais un traitement générique.</p>
+        <p>Chaque matière, tissu, cuir, plastique, reçoit un produit adapté, jamais un traitement générique.</p>
       </div>
       <div class="svc">
         <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
@@ -681,7 +675,7 @@
           <li><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 3l1.5 4.7L18 9l-4.5 1.6L12 15l-1.5-4.4L6 9l4.5-1.3z"/></svg>Détachage approfondi</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg>Traitement et nutrition cuir (si applicable)</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 10h16M4 14h16"/></svg>Détails, aérateurs et toutes les zones</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Finition haut de gamme avec parfum premium</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Finition haut de gamme avec parfum</li>
         </ul>
         <p class="plan-note">Pour les plus exigeants.</p>
         <a href="#reservation" class="btn btn-grad" data-preselect="Prestige">Choisir cette formule</a>
@@ -741,34 +735,12 @@
 
         <div class="step-panel" data-step="3" hidden>
           <div class="step-title">Étape 3 — Choisissez votre créneau</div>
-          <div class="avail-card">
-            <div class="avail-head">
-              <div class="avail-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Prochaines disponibilités</div>
-              <div class="avail-nav">
-                <button type="button" id="week-prev" aria-label="Semaine précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-6 7 6 7"/></svg></button>
-                <span id="week-range"></span>
-                <button type="button" id="week-next" aria-label="Semaine suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l6 7-6 7"/></svg></button>
-              </div>
-            </div>
-            <div class="day-tabs" id="wiz-days"></div>
+          <div class="recap-box" id="wiz-recap"></div>
+          <p class="slot-note">Choisissez un créneau parmi mes disponibilités réelles ci-dessous. Le paiement de l'acompte de 10% se fait directement sur cette page pour confirmer votre réservation.</p>
+          <div class="calendly-card">
+            <div class="calendly-inline-widget" id="calendly-embed" data-url="" style="min-width:280px;height:680px;"></div>
           </div>
-          <p class="slot-note">Créneaux indicatifs — sélectionnez celui qui vous convient, puis payez l'acompte pour confirmer votre réservation sur Calendly.</p>
-
-          <div class="deposit-grid">
-            <div class="deposit-col">
-              <h3>Payez un acompte pour réserver votre créneau</h3>
-              <div class="deposit-card">
-                <div class="deposit-amount">À régler maintenant : <b id="deposit-amount">—</b></div>
-                <p>Le paiement d'un acompte de 10% garantit votre réservation et nous permet de bloquer votre créneau. Le solde est réglé le jour de l'intervention.</p>
-              </div>
-              <p class="secure-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Paiement 100% sécurisé</p>
-              <a href="#" id="booking-cta" target="_blank" rel="noopener" class="btn btn-grad avail-cta" style="width:100%;margin-top:6px;">Réserver mon lavage →</a>
-            </div>
-            <div class="deposit-col">
-              <h3>Récapitulatif</h3>
-              <div class="recap-box" id="wiz-recap"></div>
-            </div>
-          </div>
+          <p class="secure-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Paiement 100% sécurisé via Calendly</p>
         </div>
 
         <p class="wizard-error" id="wiz-error"></p>
@@ -903,6 +875,7 @@
 </div>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&display=swap">
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
 <script>
   (function(){
@@ -920,22 +893,9 @@
       var isInt = Math.abs(rounded - Math.round(rounded)) < 0.001;
       return (isInt ? rounded.toFixed(0) : rounded.toFixed(2).replace('.', ',')) + ' €';
     }
-    function getTimeSlots(dow){
-      var startH = (dow === 0) ? 9 : 8;
-      var endH = (dow === 0) ? 19 : 20;
-      var slots = [];
-      for (var h = startH; h <= endH; h++){
-        for (var m = 0; m < 60; m += 30){
-          if (h === endH && m > 0) break;
-          slots.push((h < 10 ? '0' + h : h) + ':' + (m === 0 ? '00' : m));
-        }
-      }
-      return slots;
-    }
     var totalSteps = 3;
     var currentStep = 1;
-    var weekOffset = 0;
-    var state = { formule: null, date: null, dateLabel: null, heure: null };
+    var state = { formule: null };
 
     var stepper = document.getElementById('wiz-stepper');
     var panels = form.querySelectorAll('.step-panel');
@@ -943,75 +903,23 @@
     var nextBtn = document.getElementById('wiz-next');
     var errorEl = document.getElementById('wiz-error');
     var recapEl = document.getElementById('wiz-recap');
-    var daysEl = document.getElementById('wiz-days');
-    var weekRangeEl = document.getElementById('week-range');
-    var weekPrevBtn = document.getElementById('week-prev');
-    var weekNextBtn = document.getElementById('week-next');
-    var bookingCta = document.getElementById('booking-cta');
-    var depositAmountEl = document.getElementById('deposit-amount');
+    var calendlyEl = document.getElementById('calendly-embed');
+    var calendlyRetries = 0;
 
-    function capitalize(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
-
-    function buildDays(){
-      daysEl.innerHTML = '';
-      var start = new Date();
-      start.setDate(start.getDate() + weekOffset * 7);
-      var end = new Date(start);
-      end.setDate(end.getDate() + 6);
-      weekRangeEl.textContent = start.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) + ' – ' + end.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
-      weekPrevBtn.disabled = (weekOffset === 0);
-      weekNextBtn.disabled = (weekOffset >= 7);
-
-      for (var i = 0; i < 7; i++){
-        var d = new Date(start);
-        d.setDate(d.getDate() + i);
-        var iso = d.toISOString().slice(0, 10);
-        var dow = capitalize(d.toLocaleDateString('fr-FR', { weekday: 'short' })).replace('.', '') + '.';
-        var dom = d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
-        var full = capitalize(d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }));
-
-        var card = document.createElement('div');
-        card.className = 'day-card';
-        var head = document.createElement('div');
-        head.className = 'day-head';
-        head.innerHTML = dow + '<b>' + dom + '</b>';
-        card.appendChild(head);
-
-        var slots = document.createElement('div');
-        slots.className = 'day-slots';
-        getTimeSlots(d.getDay()).forEach(function(t){
-          var btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'day-slot';
-          if (state.date === iso && state.heure === t) btn.classList.add('selected');
-          btn.textContent = t;
-          btn.addEventListener('click', function(){
-            daysEl.querySelectorAll('.day-slot').forEach(function(s){ s.classList.remove('selected'); });
-            this.classList.add('selected');
-            state.date = iso;
-            state.dateLabel = full;
-            state.heure = t;
-            updateBookingCta();
-          });
-          slots.appendChild(btn);
-        });
-        card.appendChild(slots);
-        daysEl.appendChild(card);
-      }
+    function loadCalendlyWidget(url){
+      if (!calendlyEl) return;
+      calendlyEl.setAttribute('data-url', url);
+      calendlyEl.innerHTML = '';
+      calendlyRetries = 0;
+      (function render(){
+        if (window.Calendly && Calendly.initInlineWidget){
+          Calendly.initInlineWidget({ url: url, parentElement: calendlyEl });
+        } else if (calendlyRetries < 25){
+          calendlyRetries++;
+          setTimeout(render, 200);
+        }
+      })();
     }
-
-    function updateBookingCta(){
-      var ready = !!(state.date && state.heure);
-      bookingCta.classList.toggle('ready', ready);
-      bookingCta.href = CALENDLY_URLS[state.formule] || CALENDLY_URLS.Riviera;
-    }
-
-    weekPrevBtn.addEventListener('click', function(){
-      if (weekOffset > 0){ weekOffset--; buildDays(); }
-    });
-    weekNextBtn.addEventListener('click', function(){
-      if (weekOffset < 7){ weekOffset++; buildDays(); }
-    });
 
     form.querySelectorAll('input[name="formule"]').forEach(function(r){
       r.addEventListener('change', function(){
@@ -1042,7 +950,10 @@
       panels.forEach(function(p){ p.hidden = (parseInt(p.dataset.step, 10) !== n); });
       backBtn.style.visibility = (n === 1) ? 'hidden' : 'visible';
       nextBtn.hidden = (n === totalSteps);
-      if (n === totalSteps){ buildRecap(); buildDays(); updateBookingCta(); }
+      if (n === totalSteps){
+        buildRecap();
+        loadCalendlyWidget(CALENDLY_URLS[state.formule] || CALENDLY_URLS.Riviera);
+      }
       errorEl.classList.remove('show');
       updateStepper();
     }
@@ -1073,7 +984,6 @@
         return '<div class="recap-row"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>';
       }).join('')
         + '<div class="recap-row recap-highlight"><span>Acompte à régler aujourd\'hui</span><span>' + (deposit ? formatEuro(deposit) : '—') + '</span></div>';
-      if (depositAmountEl) depositAmountEl.textContent = deposit ? formatEuro(deposit) : '—';
     }
 
     function showError(msg){
@@ -1275,6 +1185,27 @@
       }
       updateHeaderScrolled();
       window.addEventListener('scroll', updateHeaderScrolled, { passive: true });
+    }
+
+    /* ---- mobile menu toggle ---- */
+    var navToggle = document.getElementById('nav-toggle');
+    var mobileMenu = document.getElementById('mobile-menu');
+    if (navToggle && mobileMenu){
+      function closeMobileMenu(){
+        mobileMenu.hidden = true;
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+      navToggle.addEventListener('click', function(){
+        var open = !mobileMenu.hidden;
+        mobileMenu.hidden = open;
+        navToggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+      });
+      mobileMenu.querySelectorAll('a').forEach(function(link){
+        link.addEventListener('click', closeMobileMenu);
+      });
+      window.addEventListener('resize', function(){
+        if (window.innerWidth >= 860) closeMobileMenu();
+      });
     }
 
     /* ---- scroll reveal ---- */
