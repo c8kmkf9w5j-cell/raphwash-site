@@ -269,10 +269,11 @@
   .plan-included{display:flex;align-items:center;gap:8px;background:rgba(63,174,114,.12);border:1px solid rgba(63,174,114,.4);color:#7fd9a4;border-radius:999px;padding:7px 13px;font-size:12px;font-weight:700;}
   .plan-included svg{width:16px;height:16px;flex:none;color:#4ec685;}
   .plan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;}
-  .plan li{display:flex;gap:10px;font-size:13.5px;color:var(--text-muted);align-items:flex-start;}
-  .plan li svg{width:17px;height:17px;flex:none;margin-top:2px;color:var(--blue);}
+  .plan li{display:flex;gap:10px;font-size:13.5px;color:var(--text-muted);align-items:center;}
+  .plan li svg{width:17px;height:17px;flex:none;color:var(--blue);}
   .plan-plus{font-family:var(--sans);font-weight:800;font-size:14px;line-height:1;color:#7fd9a4;flex:none;align-self:center;}
   .plan-note{font-size:12.5px;color:var(--text-muted);font-style:italic;}
+  .plan > a.btn{margin-top:auto;}
 
   /* parrainage */
   .referral{border-top:1px solid var(--border);}
@@ -285,7 +286,7 @@
   .referral-card-gold .referral-icon{color:var(--gold);}
   .referral-icon svg{width:16px;height:16px;}
   .referral-icon{font-size:16px;}
-  .referral-card b{font-family:var(--display);text-transform:uppercase;font-size:12px;letter-spacing:.04em;color:var(--text-muted);}
+  .referral-card b{font-family:var(--display);text-transform:uppercase;font-size:14.5px;letter-spacing:.04em;color:var(--text-muted);}
   .referral-amount{font-family:var(--display);font-size:26px;color:#7FE0FF;line-height:1;}
   .referral-card-gold .referral-amount{color:#F0C878;}
   .referral-card p{font-size:12px;margin-top:1px;}
@@ -668,7 +669,6 @@
     </div>
     <div class="plans" data-reveal>
       <div class="plan popular">
-        <div class="plan-badge badge-blue"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>Populaire</div>
         <div>
           <div class="plan-name">Riviera</div>
           <div class="plan-sub">Un intérieur propre et frais</div>
