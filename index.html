@@ -271,7 +271,25 @@
   .plan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;}
   .plan li{display:flex;gap:10px;font-size:13.5px;color:var(--text-muted);align-items:flex-start;}
   .plan li svg{width:17px;height:17px;flex:none;margin-top:2px;color:var(--blue);}
+  .plan-plus{font-family:var(--sans);font-weight:800;font-size:14px;line-height:1;color:#7fd9a4;flex:none;align-self:center;}
   .plan-note{font-size:12.5px;color:var(--text-muted);font-style:italic;}
+
+  /* parrainage */
+  .referral{border-top:1px solid var(--border);}
+  .referral-grid{display:grid;gap:14px;grid-template-columns:1fr;max-width:520px;margin-inline:auto;}
+  @media (min-width:600px){ .referral-grid{grid-template-columns:1fr 1fr;} }
+  .referral-card{border:1px solid var(--border);background:var(--surface);border-radius:14px;padding:16px 18px;text-align:center;box-shadow:var(--shadow-card);display:flex;flex-direction:column;align-items:center;gap:3px;transition:box-shadow .3s var(--ease-lift),transform .25s var(--ease-lift);}
+  .referral-card:hover{box-shadow:var(--shadow-card-hover);transform:translateY(-3px);}
+  .referral-card-gold{border-color:rgba(201,164,92,.4);}
+  .referral-icon{width:32px;height:32px;border-radius:10px;background:var(--grad-soft);border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow-chip);display:flex;align-items:center;justify-content:center;color:var(--blue);margin-bottom:4px;}
+  .referral-card-gold .referral-icon{color:var(--gold);}
+  .referral-icon svg{width:16px;height:16px;}
+  .referral-icon{font-size:16px;}
+  .referral-card b{font-family:var(--display);text-transform:uppercase;font-size:12px;letter-spacing:.04em;color:var(--text-muted);}
+  .referral-amount{font-family:var(--display);font-size:26px;color:#7FE0FF;line-height:1;}
+  .referral-card-gold .referral-amount{color:#F0C878;}
+  .referral-card p{font-size:12px;margin-top:1px;}
+  .referral-note{max-width:560px;margin:18px auto 0;text-align:center;font-size:12.5px;color:var(--text-muted);}
 
   /* zone */
   .zone{border-top:1px solid var(--border);}
@@ -400,7 +418,7 @@
   .foot-grid{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;align-items:center;}
   .foot-brand{display:flex;align-items:center;}
   .foot-brand img{height:30px;width:auto;display:block;mix-blend-mode:screen;}
-  .foot-links{display:flex;gap:22px;list-style:none;padding:0;margin:0;font-size:13px;color:var(--text-muted);flex-wrap:wrap;}
+  .foot-links{display:flex;gap:22px;list-style:none;padding:0;margin:0;font-size:13px;color:var(--text-muted);flex-wrap:wrap;justify-content:center;width:100%;}
   .foot-links a{text-decoration:none;color:var(--text-muted);}
   .foot-links a:hover{color:var(--blue);}
   .foot-copy{font-size:12.5px;color:var(--text-muted);width:100%;margin-top:8px;}
@@ -482,7 +500,7 @@
       <div>
         <p class="eyebrow">Saint-Raphaël · Côte d'Azur — Detailing auto à domicile</p>
         <h1>Plus qu'un lavage,<span class="grad">une attention</span></h1>
-        <p class="lead">On se déplace jusqu'à vous, à Saint-Raphaël comme sur toute la Côte d'Azur. Résultats bluffants sur sièges, moquette et cuir, avec des produits professionnels.</p>
+        <p class="lead">Spécialiste du detailing intérieur automobile, RaphWash se déplace jusqu'à vous, à Saint-Raphaël comme sur toute la Côte d'Azur. Résultats bluffants sur sièges, moquette et cuir, avec des produits professionnels.</p>
         <div class="hero-actions">
           <a href="#reservation" class="btn btn-grad magnetic">Réserver maintenant →</a>
           <a href="#tarifs" class="btn-text">Voir les tarifs ↓</a>
@@ -543,8 +561,8 @@
       </div>
       <div class="svc">
         <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 4l7 7"/></svg></div>
-        <h3>Vitres intérieures</h3>
-        <p>Nettoyage sans traces des vitres et rétroviseurs, y compris angles morts et pare-brise intérieur.</p>
+        <h3>Vitres intérieures et extérieures</h3>
+        <p>Nettoyage sans traces des vitres intérieures et extérieures, rétroviseurs, angles morts et pare-brise.</p>
       </div>
       <div class="svc">
         <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
@@ -659,8 +677,7 @@
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12c0-3 2-4 2-7M12 12c0-4 3-5 3-9M18 12c0-3 2-4 2-7"/><path d="M4 18h16"/></svg>Aspiration complète habitacle + coffre</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/><circle cx="8" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r=".6" fill="currentColor" stroke="none"/></svg>Nettoyage des plastiques et surfaces</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 4l7 7"/></svg>Nettoyage des vitres intérieures</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Finition soignée</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 4l7 7"/></svg>Nettoyage des vitres intérieures et extérieures</li>
         </ul>
         <p class="plan-note">L'essentiel, toujours impeccable.</p>
         <a href="#reservation" class="btn btn-grad" data-preselect="Riviera">Choisir cette formule</a>
@@ -674,11 +691,10 @@
         <div class="plan-price"><span class="price-num"><b data-count="89">89</b> €</span> <span class="price-unit">/ intervention</span></div>
         <div class="plan-included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>Tout le pack Riviera inclus</div>
         <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/><circle cx="8" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r=".6" fill="currentColor" stroke="none"/></svg>Nettoyage approfondi des plastiques et zones de contact</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V9a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v2"/><path d="M6 20h13a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-6"/><path d="M6 20v-3"/><path d="M9 6h4"/></svg>Shampoing complet des sièges, tapis et moquettes</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 10h18M8 10v9M13 10v9"/></svg>Nettoyage et finition seuils de porte</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 10h16M4 14h16"/></svg>Détails et aérateurs</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Finition premium avec parfum</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/><circle cx="8" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r=".6" fill="currentColor" stroke="none"/></svg>Nettoyage approfondi des plastiques et zones de contact</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V9a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v2"/><path d="M6 20h13a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-6"/><path d="M6 20v-3"/><path d="M9 6h4"/></svg>Shampoing complet des sièges, tapis et moquettes</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 10h18M8 10v9M13 10v9"/></svg>Nettoyage et finition seuils de porte</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 10h16M4 14h16"/></svg>Détails et aérateurs</li>
         </ul>
         <p class="plan-note">Un intérieur comme neuf.</p>
         <a href="#reservation" class="btn btn-grad" data-preselect="Signature">Choisir cette formule</a>
@@ -691,16 +707,40 @@
         <div class="plan-price"><span class="price-num"><b data-count="119">119</b> €</span> <span class="price-unit">/ intervention</span></div>
         <div class="plan-included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>Tout le pack Signature inclus</div>
         <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V9a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v2"/><path d="M6 20h13a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-6"/><path d="M6 20v-3"/><path d="M9 6h4"/></svg>Injection / extraction sièges et tissus</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 3l1.5 4.7L18 9l-4.5 1.6L12 15l-1.5-4.4L6 9l4.5-1.3z"/></svg>Détachage approfondi</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg>Traitement et nutrition cuir (si applicable)</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 10h16M4 14h16"/></svg>Détails, aérateurs et toutes les zones</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Finition haut de gamme avec parfum</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V9a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v2"/><path d="M6 20h13a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-6"/><path d="M6 20v-3"/><path d="M9 6h4"/></svg>Injection / extraction sièges et tissus</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 3l1.5 4.7L18 9l-4.5 1.6L12 15l-1.5-4.4L6 9l4.5-1.3z"/></svg>Détachage approfondi</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg>Traitement et nutrition cuir (si applicable)</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 10h16M4 14h16"/></svg>Détails, aérateurs et toutes les zones</li>
         </ul>
         <p class="plan-note">Pour les plus exigeants.</p>
         <a href="#reservation" class="btn btn-grad" data-preselect="Prestige">Choisir cette formule</a>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="referral" id="parrainage">
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <p class="eyebrow">Parrainage</p>
+      <h2>Parlez de RaphWash autour de vous</h2>
+      <p>Votre proche réserve sa première prestation : vous gagnez tous les deux 10€.</p>
+    </div>
+    <div class="referral-grid" data-reveal>
+      <div class="referral-card">
+        <div class="referral-icon">🏆</div>
+        <b>Vous, le parrain</b>
+        <div class="referral-amount">-10 €</div>
+        <p>sur votre prochaine prestation, dès que votre filleul a réservé la sienne.</p>
+      </div>
+      <div class="referral-card referral-card-gold">
+        <div class="referral-icon">🌟</div>
+        <b>Votre filleul</b>
+        <div class="referral-amount">-10 €</div>
+        <p>sur sa première prestation, en mentionnant votre nom lors de sa réservation.</p>
+      </div>
+    </div>
+    <p class="referral-note">Pour en profiter, votre filleul indique simplement votre nom (message lors de la réservation, ou en nous contactant directement). Les 10€ sont déduits du solde réglé sur place, le jour de l'intervention.</p>
   </div>
 </section>
 
@@ -810,7 +850,7 @@
       </details>
       <details class="faq-item">
         <summary>Comment puis-je réserver un créneau ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <p>Pour réserver un créneau, cliquez sur le bouton « Réserver maintenant » en haut de la page. Vous pourrez alors choisir votre formule, puis payer un acompte de 10% pour garantir votre réservation.</p>
+        <p>Pour réserver un créneau, cliquez sur le bouton « Réserver maintenant » en haut de la page. Vous pourrez alors choisir votre formule, puis payer un acompte de 10% en ligne pour garantir votre réservation. Le solde est à régler directement sur place le jour de l'intervention (carte bancaire, espèces ou virement instantané).</p>
       </details>
       <details class="faq-item">
         <summary>Intervenez-vous sur tous les types de véhicules ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
@@ -864,6 +904,7 @@
     <ul class="foot-links">
       <li><a href="#services">Prestations</a></li>
       <li><a href="#tarifs">Formules</a></li>
+      <li><a href="#parrainage">Parrainage</a></li>
       <li><a href="#zone">Zone d'intervention</a></li>
       <li><a href="#horaires">Horaires</a></li>
       <li><a href="#reservation">Réservation</a></li>
@@ -1308,10 +1349,9 @@
     var PLACEHOLDER_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 16l-5-5-4 4-3-3-4 4"/></svg>';
 
     var PAIRS = [
-      { label:'Jantes', before:'assets/ba-jantes-avant.jpg', after:'assets/ba-jantes-apres.jpg' },
+      { label:'Volant', before:'assets/ba-volant-avant.jpg', after:'assets/ba-volant-apres.jpg' },
       { label:'Pédalier', before:'assets/ba-pedalier-avant.jpg', after:'assets/ba-pedalier-apres.jpg' },
       { label:'Tapis', before:'assets/ba-tapis-avant.jpg', after:'assets/ba-tapis-apres.jpg' },
-      { label:'Volant', before:'assets/ba-volant-avant.jpg', after:'assets/ba-volant-apres.jpg' },
       { label:'Sièges', before:'assets/ba-sieges-avant.jpg', after:'assets/ba-sieges-apres.jpg' },
       { label:'Coffre', before:'assets/ba-coffre-avant.jpg', after:'assets/ba-coffre-apres.jpg' }
     ];
@@ -1425,7 +1465,7 @@
           '<h4>Objet</h4>' +
           '<p>Les présentes CGV encadrent les prestations de nettoyage et detailing automobile à domicile proposées par RaphWash sur la Côte d\'Azur.</p>' +
           '<h4>Tarifs et réservation</h4>' +
-          '<p>Les tarifs des formules Riviera, Signature et Prestige sont indiqués TTC sur le site. Un acompte de 10% est demandé pour valider la réservation d\'un créneau ; le solde est réglé le jour de l\'intervention.</p>' +
+          '<p>Les tarifs des formules Riviera, Signature et Prestige sont indiqués TTC sur le site. Un acompte de 10% est demandé en ligne pour valider la réservation d\'un créneau ; le solde est réglé directement sur place le jour de l\'intervention, par carte bancaire, espèces ou virement instantané.</p>' +
           '<h4>Annulation et report</h4>' +
           '<p>Toute annulation ou report doit être signalé au moins 24h à l\'avance. Passé ce délai, l\'acompte pourra être conservé.</p>' +
           '<h4>Droit de rétractation</h4>' +
