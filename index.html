@@ -3,15 +3,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RaphWash</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
-<meta name="description" content="Detailing auto à domicile à Saint-Raphaël et sur toute la Côte d'Azur. Nettoyage intérieur et extérieur, on se déplace chez vous. Réservez en ligne.">
+<meta name="description" content="Detailing auto à domicile à Saint-Raphaël et sur toute la Côte d'Azur. Nettoyage intérieur, on se déplace chez vous. Réservez en ligne.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://raphwash.fr">
 <meta property="og:title" content="RaphWash — Detailing auto à domicile">
-<meta property="og:description" content="Detailing auto à domicile à Saint-Raphaël et sur toute la Côte d'Azur. Nettoyage intérieur et extérieur, on se déplace chez vous. Réservez en ligne.">
+<meta property="og:description" content="Detailing auto à domicile à Saint-Raphaël et sur toute la Côte d'Azur. Nettoyage intérieur, on se déplace chez vous. Réservez en ligne.">
 <meta property="og:image" content="https://raphwash.fr/assets/favicon.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="RaphWash — Detailing auto à domicile">
-<meta name="twitter:description" content="Detailing auto à domicile à Saint-Raphaël et sur toute la Côte d'Azur. Nettoyage intérieur et extérieur, on se déplace chez vous. Réservez en ligne.">
+<meta name="twitter:description" content="Detailing auto à domicile à Saint-Raphaël et sur toute la Côte d'Azur. Nettoyage intérieur, on se déplace chez vous. Réservez en ligne.">
 <meta name="twitter:image" content="https://raphwash.fr/assets/favicon.png">
 <style>
   :root{
@@ -266,8 +266,19 @@
   @keyframes priceGlowGold{0%,100%{text-shadow:0 0 8px rgba(240,200,120,.16);}50%{text-shadow:0 0 13px rgba(240,200,120,.32);}}
   @media (prefers-reduced-motion:reduce){ .plan-price{animation:none;text-shadow:0 0 14px rgba(127,224,255,.18);} .plan.featured .plan-price{text-shadow:0 0 14px rgba(240,200,120,.2);} }
   .plan-price .price-unit{font-family:var(--sans);font-size:13px;color:var(--text-muted);font-weight:700;text-transform:none;text-shadow:none;}
-  .plan-included{display:flex;align-items:center;gap:8px;background:rgba(63,174,114,.12);border:1px solid rgba(63,174,114,.4);color:#7fd9a4;border-radius:999px;padding:7px 13px;font-size:12px;font-weight:700;}
+  .plan-included-wrap{background:rgba(63,174,114,.12);border:1px solid rgba(63,174,114,.4);border-radius:999px;transition:border-radius .2s ease;}
+  .plan-included-wrap.open{border-radius:14px;}
+  .plan-included{display:flex;align-items:center;gap:8px;background:none;border:none;color:#7fd9a4;padding:7px 13px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;width:100%;text-align:left;border-radius:inherit;}
+  .plan-included:hover{background:rgba(63,174,114,.15);}
   .plan-included svg{width:16px;height:16px;flex:none;color:#4ec685;}
+  .plan-included-check{flex:none;}
+  .plan-included-label{flex:1;}
+  .plan-included-chevron{width:14px;height:14px;flex:none;transition:transform .25s ease;}
+  .plan-included[aria-expanded="true"] .plan-included-chevron{transform:rotate(180deg);}
+  .plan-included-list{list-style:none;margin:0;padding:0 13px 10px;display:flex;flex-direction:column;gap:8px;border-top:1px solid rgba(63,174,114,.25);padding-top:8px;}
+  .plan-included-list[hidden]{display:none;}
+  .plan-included-list li{display:flex;gap:9px;font-size:12.5px;color:var(--text-muted);align-items:center;}
+  .plan-included-list li svg{width:15px;height:15px;flex:none;color:#4ec685;}
   .plan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;}
   .plan li{display:flex;gap:10px;font-size:13.5px;color:var(--text-muted);align-items:center;}
   .plan li svg{width:17px;height:17px;flex:none;color:var(--blue);}
@@ -363,7 +374,7 @@
   form .btn{width:100%;}
 
   .autocomplete-wrap{position:relative;}
-  .autocomplete-list{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:40;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow-card);max-height:220px;overflow-y:auto;display:none;}
+  .autocomplete-list{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:40;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow-card);max-height:220px;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;display:none;}
   .autocomplete-list.show{display:block;}
   .autocomplete-item{padding:10px 13px;font-size:13.5px;cursor:pointer;}
   .autocomplete-item:hover,.autocomplete-item.active{background:var(--surface-2);color:var(--blue);}
@@ -586,7 +597,7 @@
       <div class="zone-list">
         <div class="zone-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          <p>Saint-Raphaël et environs en priorité, déplacement possible sur toute la Côte d'Azur, précisez votre ville lors de votre réservation.</p>
+          <p>Précisez votre adresse complète (numéro, rue, ville, code postal) lors de votre réservation sur Calendly.</p>
         </div>
         <div class="zone-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
@@ -594,7 +605,7 @@
         </div>
         <div class="zone-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l2-7h14l2 7"/><path d="M5 13h14v5H5z"/><circle cx="8" cy="18" r="1.5"/><circle cx="16" cy="18" r="1.5"/></svg>
-          <p>Un point d'eau et un accès à l'électricité à proximité suffisent, le reste du matériel est fourni.</p>
+          <p>Un point d'accès à l'électricité à proximité suffit, le reste du matériel est fourni.</p>
         </div>
       </div>
     </div>
@@ -675,9 +686,13 @@
         </div>
         <div class="plan-price"><span class="price-num"><b data-count="59">59</b> €</span> <span class="price-unit">/ intervention</span></div>
         <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12c0-3 2-4 2-7M12 12c0-4 3-5 3-9M18 12c0-3 2-4 2-7"/><path d="M4 18h16"/></svg>Aspiration complète habitacle + coffre</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/><circle cx="8" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r=".6" fill="currentColor" stroke="none"/></svg>Nettoyage des plastiques et surfaces</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12c0-3 2-4 2-7M12 12c0-4 3-5 3-9M18 12c0-3 2-4 2-7"/><path d="M4 18h16"/></svg>Aspiration sièges, moquettes et coffre</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4M4 4v4M20 4h-4M20 4v4M4 20h4M4 20v-4M20 20h-4M20 20v-4"/></svg>Aspiration des recoins (rails de sièges, sous les pédales, vide-poches)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/><circle cx="8" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r=".6" fill="currentColor" stroke="none"/></svg>Dépoussiérage tableau de bord, contre-portes, aérateurs</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 4l7 7"/></svg>Nettoyage des vitres intérieures et extérieures</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="7" ry="5"/><path d="M12 7V4M9 4h6"/></svg>Nettoyage rétroviseur intérieur</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/><circle cx="12" cy="12" r="3.5"/></svg>Dressing plastiques</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8c3 0 3-3 6-3s3 3 6 3"/><path d="M4 13c3 0 3-3 6-3s3 3 6 3"/><path d="M4 18c3 0 3-3 6-3s3 3 6 3"/></svg>Parfum d'ambiance</li>
         </ul>
         <p class="plan-note">L'essentiel, toujours impeccable.</p>
         <a href="#reservation" class="btn btn-grad" data-preselect="Riviera">Choisir cette formule</a>
@@ -689,12 +704,25 @@
           <div class="plan-sub">Le soin du détail</div>
         </div>
         <div class="plan-price"><span class="price-num"><b data-count="89">89</b> €</span> <span class="price-unit">/ intervention</span></div>
-        <div class="plan-included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>Tout le pack Riviera inclus</div>
+        <div class="plan-included-wrap" data-included-wrap="riviera-included-list">
+          <button type="button" class="plan-included" aria-expanded="false" aria-controls="riviera-included-list" data-included-toggle="riviera-included-list"><svg class="plan-included-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg><span class="plan-included-label">Tout le pack Riviera inclus</span><svg class="plan-included-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+          <ul class="plan-included-list" id="riviera-included-list" hidden>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12c0-3 2-4 2-7M12 12c0-4 3-5 3-9M18 12c0-3 2-4 2-7"/><path d="M4 18h16"/></svg>Aspiration sièges, moquettes et coffre</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4M4 4v4M20 4h-4M20 4v4M4 20h4M4 20v-4M20 20h-4M20 20v-4"/></svg>Aspiration des recoins (rails de sièges, sous les pédales, vide-poches)</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/><circle cx="8" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r=".6" fill="currentColor" stroke="none"/></svg>Dépoussiérage tableau de bord, contre-portes, aérateurs</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 4l7 7"/></svg>Nettoyage des vitres intérieures et extérieures</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="7" ry="5"/><path d="M12 7V4M9 4h6"/></svg>Nettoyage rétroviseur intérieur</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/><circle cx="12" cy="12" r="3.5"/></svg>Dressing plastiques</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8c3 0 3-3 6-3s3 3 6 3"/><path d="M4 13c3 0 3-3 6-3s3 3 6 3"/><path d="M4 18c3 0 3-3 6-3s3 3 6 3"/></svg>Parfum d'ambiance</li>
+          </ul>
+        </div>
         <ul>
-          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/><circle cx="8" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r=".6" fill="currentColor" stroke="none"/></svg>Nettoyage approfondi des plastiques et zones de contact</li>
-          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V9a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v2"/><path d="M6 20h13a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-6"/><path d="M6 20v-3"/><path d="M9 6h4"/></svg>Shampoing complet des sièges, tapis et moquettes</li>
-          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 10h18M8 10v9M13 10v9"/></svg>Nettoyage et finition seuils de porte</li>
-          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 10h16M4 14h16"/></svg>Détails et aérateurs</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/><circle cx="8" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r=".6" fill="currentColor" stroke="none"/></svg>Nettoyage tableau de bord, contre-portes, pommeau de vitesse</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M12 4v4M4.9 15.5L8 13M19.1 15.5L16 13"/></svg>Nettoyage volant</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V9a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v2"/><path d="M6 20h13a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-6"/><path d="M6 20v-3"/><path d="M9 6h4"/></svg>Shampouinage tissu (sièges, tapis, moquettes)</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 10h18M8 10v9M13 10v9"/></svg>Nettoyage seuils de porte</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/></svg>Nettoyage plastiques coffre</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="16" r="4"/><circle cx="6" cy="10" r="2"/><circle cx="10" cy="6" r="2"/><circle cx="14" cy="6" r="2"/><circle cx="18" cy="10" r="2"/></svg>Élimination poils d'animaux (coffre uniquement)</li>
         </ul>
         <p class="plan-note">Un intérieur comme neuf.</p>
         <a href="#reservation" class="btn btn-grad" data-preselect="Signature">Choisir cette formule</a>
@@ -705,12 +733,24 @@
           <div class="plan-sub">L'excellence sans compromis</div>
         </div>
         <div class="plan-price"><span class="price-num"><b data-count="119">119</b> €</span> <span class="price-unit">/ intervention</span></div>
-        <div class="plan-included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>Tout le pack Signature inclus</div>
+        <div class="plan-included-wrap" data-included-wrap="signature-included-list">
+          <button type="button" class="plan-included" aria-expanded="false" aria-controls="signature-included-list" data-included-toggle="signature-included-list"><svg class="plan-included-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg><span class="plan-included-label">Tout le pack Signature inclus</span><svg class="plan-included-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+          <ul class="plan-included-list" id="signature-included-list" hidden>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/><circle cx="8" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r=".6" fill="currentColor" stroke="none"/></svg>Nettoyage tableau de bord, contre-portes, pommeau de vitesse</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M12 4v4M4.9 15.5L8 13M19.1 15.5L16 13"/></svg>Nettoyage volant</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V9a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v2"/><path d="M6 20h13a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-6"/><path d="M6 20v-3"/><path d="M9 6h4"/></svg>Shampouinage tissu (sièges, tapis, moquettes)</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 10h18M8 10v9M13 10v9"/></svg>Nettoyage seuils de porte</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/></svg>Nettoyage plastiques coffre</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="16" r="4"/><circle cx="6" cy="10" r="2"/><circle cx="10" cy="6" r="2"/><circle cx="14" cy="6" r="2"/><circle cx="18" cy="10" r="2"/></svg>Élimination poils d'animaux (coffre uniquement)</li>
+          </ul>
+        </div>
         <ul>
-          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V9a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v2"/><path d="M6 20h13a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-6"/><path d="M6 20v-3"/><path d="M9 6h4"/></svg>Injection / extraction sièges et tissus</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V9a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v2"/><path d="M6 20h13a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-6"/><path d="M6 20v-3"/><path d="M9 6h4"/></svg>Extraction en profondeur sièges tissus (injection-extraction)</li>
           <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 3l1.5 4.7L18 9l-4.5 1.6L12 15l-1.5-4.4L6 9l4.5-1.3z"/></svg>Détachage approfondi</li>
-          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg>Traitement et nutrition cuir (si applicable)</li>
-          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 10h16M4 14h16"/></svg>Détails, aérateurs et toutes les zones</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg>Nettoyage cuir en profondeur</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s6 7 6 11a6 6 0 1 1-12 0c0-4 6-11 6-11z"/></svg>Nutrition / hydratation du cuir</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="16" r="4"/><circle cx="6" cy="10" r="2"/><circle cx="10" cy="6" r="2"/><circle cx="14" cy="6" r="2"/><circle cx="18" cy="10" r="2"/></svg>Élimination poils d'animaux (habitacle + coffre)</li>
+          <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="6" cy="8" r="1.3"/><circle cx="11" cy="6" r="1"/><circle cx="16" cy="9" r="1.4"/><circle cx="8" cy="13" r="1"/><circle cx="13" cy="14" r="1.3"/><circle cx="18" cy="15" r="1"/><circle cx="5" cy="17" r="1.1"/><circle cx="10" cy="19" r="1"/><circle cx="15" cy="19" r="1.2"/></svg>Élimination du sable incrusté</li>
         </ul>
         <p class="plan-note">Pour les plus exigeants.</p>
         <a href="#reservation" class="btn btn-grad" data-preselect="Prestige">Choisir cette formule</a>
@@ -770,7 +810,7 @@
         </div>
 
         <div class="step-panel" data-step="2" hidden>
-          <div class="step-title">Étape 2 — Véhicule &amp; lieu</div>
+          <div class="step-title">Étape 2 — Véhicule</div>
           <div class="row2">
             <div class="field">
               <label for="f-vehicule">Véhicule (marque / modèle)</label>
@@ -789,13 +829,6 @@
                 <option value="Utilitaire léger">Utilitaire léger</option>
                 <option value="Autre">Autre (précisez en message)</option>
               </select>
-            </div>
-          </div>
-          <div class="field">
-            <label for="f-cp">Ville / code postal</label>
-            <div class="autocomplete-wrap">
-              <input id="f-cp" name="cp" type="text" placeholder="Ex. Saint-Raphaël, 83700" autocomplete="off">
-              <div class="autocomplete-list" id="cp-suggest"></div>
             </div>
           </div>
         </div>
@@ -834,7 +867,7 @@
       </details>
       <details class="faq-item">
         <summary>De quoi ai-je besoin pour la prestation ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <p>D'un point d'eau et d'un accès à l'électricité à proximité du véhicule. Le reste du matériel et des produits est fourni par nos soins.</p>
+        <p>D'un point d'accès à l'électricité à proximité du véhicule. Le reste du matériel et des produits est fourni par nos soins.</p>
       </details>
       <details class="faq-item">
         <summary>Combien de temps dure une intervention ?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
@@ -1033,21 +1066,6 @@
       'Jaguar E-Pace','Jaguar F-Pace'
     ];
 
-    var VILLES = [
-      'Saint-Raphaël, 83700','Fréjus, 83600','Sainte-Maxime, 83120','Saint-Tropez, 83990','Roquebrune-sur-Argens, 83520','Les Issambres, 83380','Puget-sur-Argens, 83480','Le Muy, 83490','Draguignan, 83300','Les Arcs, 83460','Vidauban, 83550','Le Luc, 83340',
-      'Cavalaire-sur-Mer, 83240','La Croix-Valmer, 83420','Gassin, 83580','Ramatuelle, 83350','Cogolin, 83310','Grimaud, 83310','La Garde-Freinet, 83680','Le Lavandou, 83980','Bormes-les-Mimosas, 83230',
-      'Hyères, 83400','La Londe-les-Maures, 83250','Toulon, 83000','La Seyne-sur-Mer, 83500','Six-Fours-les-Plages, 83140','Sanary-sur-Mer, 83110','Bandol, 83150','La Valette-du-Var, 83160','La Garde, 83130','Ollioules, 83190','Solliès-Pont, 83210','Carqueiranne, 83320','Le Pradet, 83220',
-      'Mandelieu-la-Napoule, 06210','Théoule-sur-Mer, 06590','Cannes, 06400','Le Cannet, 06110','Mougins, 06250','Vallauris, 06220','Golfe-Juan, 06220','Antibes, 06600','Juan-les-Pins, 06160','Biot, 06410','Valbonne, 06560','Sophia Antipolis, 06560','Grasse, 06130',
-      'Cagnes-sur-Mer, 06800','Villeneuve-Loubet, 06270','Saint-Laurent-du-Var, 06700','Nice, 06000','Saint-Jean-Cap-Ferrat, 06230','Villefranche-sur-Mer, 06230','Beaulieu-sur-Mer, 06310','Èze, 06360','Cap-d\'Ail, 06320','Monaco, 98000',
-      'Roquebrune-Cap-Martin, 06190','Menton, 06500','Vence, 06140','Saint-Paul-de-Vence, 06570','Carros, 06510','Le Bar-sur-Loup, 06620',
-      'Bagnols-en-Forêt, 83600','Callian, 83440','Fayence, 83440','Montauroux, 83440','Tanneron, 83440','Seillans, 83440','Mons, 83440','Tourrettes, 83440','Saint-Paul-en-Forêt, 83440',
-      'Callas, 83830','Bargemon, 83830','Claviers, 83830','Figanières, 83830','Trans-en-Provence, 83720','Flayosc, 83780','Lorgues, 83510','Taradeau, 83460','Le Thoronet, 83340',
-      'Cabasse, 83340','Carcès, 83570','Besse-sur-Issole, 83890','Gonfaron, 83590','Pignans, 83790','La Farlède, 83210','Solliès-Toucas, 83210','Cuers, 83390','Puget-Ville, 83390','Collobrières, 83610',
-      'Tourrettes-sur-Loup, 06140','Gourdon, 06620','Saint-Cézaire-sur-Siagne, 06530','Opio, 06650','Châteauneuf-Grasse, 06740','Le Rouret, 06650','Roquefort-les-Pins, 06330','La Colle-sur-Loup, 06480',
-      'Peymeinade, 06530','Mouans-Sartoux, 06370','Spéracèdes, 06530','Cabris, 06530','Saint-Vallier-de-Thiey, 06460','Peille, 06440','Peillon, 06440','La Turbie, 06320','Coaraze, 06390',
-      'Levens, 06670','Falicon, 06950','Aspremont, 06790','Gattières, 06510','Saint-Jeannet, 06640','La Gaude, 06610','Tourrette-Levens, 06690'
-    ];
-
     var TYPE_CITADINE = [
       'Renault Twingo','Renault Clio','Renault Zoe','Renault Twizy','Renault 5','Renault 5 E-Tech','Renault R5','Renault 4','Renault 4 E-Tech','Renault R4',
       'Peugeot 106','Peugeot 107','Peugeot 108','Peugeot 205','Peugeot 206','Peugeot 207','Peugeot 208','Peugeot e-208','Peugeot iOn','Peugeot 1007',
@@ -1223,10 +1241,9 @@
         items.forEach(function(it, i){ it.classList.toggle('active', i === activeIndex); });
       });
 
-      suggestEl.addEventListener('pointerdown', function(e){
+      suggestEl.addEventListener('click', function(e){
         var item = e.target.closest('.autocomplete-item');
         if (!item) return;
-        e.preventDefault();
         input.value = item.textContent;
         hide();
         if (onSelect) onSelect(input.value);
@@ -1242,10 +1259,6 @@
     var vehiculeInput = document.getElementById('f-vehicule');
     var vehiculeSuggest = document.getElementById('vehicule-suggest');
     if (vehiculeInput && vehiculeSuggest){ setupAutocomplete(vehiculeInput, vehiculeSuggest, VEHICLES, applyVehicleType); }
-
-    var cpInput = document.getElementById('f-cp');
-    var cpSuggest = document.getElementById('cp-suggest');
-    if (cpInput && cpSuggest){ setupAutocomplete(cpInput, cpSuggest, VILLES); }
 
     form.querySelectorAll('input[name="formule"]').forEach(function(r){
       r.addEventListener('change', function(){
@@ -1297,13 +1310,11 @@
     function buildRecap(){
       var vehicule = form.querySelector('#f-vehicule').value.trim();
       var type = form.querySelector('#f-type').value;
-      var cp = form.querySelector('#f-cp').value.trim();
       var price = state.formule ? PRICE_VALUES[state.formule] : null;
       var deposit = price ? price * 0.10 : null;
       var rows = [
         ['Formule', state.formule ? state.formule + ' — ' + formatEuro(price) : '—'],
         ['Véhicule', (vehicule || '—') + (type ? ' (' + type + ')' : '')],
-        ['Lieu', cp || '—'],
         ['Prix total du lavage', price ? formatEuro(price) : '—']
       ];
       recapEl.innerHTML = rows.map(function(r){
@@ -1321,8 +1332,7 @@
       if (currentStep === 1 && !state.formule){ showError('Choisissez une formule pour continuer.'); return; }
       if (currentStep === 2){
         var vehicule = form.querySelector('#f-vehicule').value.trim();
-        var cp = form.querySelector('#f-cp').value.trim();
-        if (!vehicule || !cp){ showError('Merci de renseigner le véhicule et la ville.'); return; }
+        if (!vehicule){ showError('Merci de renseigner le véhicule.'); return; }
       }
       currentStep = Math.min(currentStep + 1, totalSteps);
       showStep(currentStep);
@@ -1563,6 +1573,19 @@
         });
       });
     }
+
+    /* ---- expandable "pack inclus" details ---- */
+    document.querySelectorAll('[data-included-toggle]').forEach(function(btn){
+      var list = document.getElementById(btn.getAttribute('data-included-toggle'));
+      var wrap = btn.closest('.plan-included-wrap');
+      if (!list) return;
+      btn.addEventListener('click', function(){
+        var open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+        list.hidden = open;
+        if (wrap) wrap.classList.toggle('open', !open);
+      });
+    });
 
     /* ---- 3D tilt on pricing cards ---- */
     if (!reduceMotion && matchMedia('(hover: hover)').matches){
