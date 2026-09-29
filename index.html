@@ -3,15 +3,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RaphWash</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
-<meta name="description" content="Detailing auto à domicile à Saint-Raphaël et sur toute la Côte d'Azur. Nettoyage intérieur, on se déplace chez vous. Réservez en ligne.">
+<meta name="description" content="Detailing auto à domicile à Saint-Raphaël, Fréjus et Sainte-Maxime. Nettoyage intérieur, on se déplace chez vous. Réservez en ligne.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://raphwash.fr">
 <meta property="og:title" content="RaphWash — Detailing auto à domicile">
-<meta property="og:description" content="Detailing auto à domicile à Saint-Raphaël et sur toute la Côte d'Azur. Nettoyage intérieur, on se déplace chez vous. Réservez en ligne.">
+<meta property="og:description" content="Detailing auto à domicile à Saint-Raphaël, Fréjus et Sainte-Maxime. Nettoyage intérieur, on se déplace chez vous. Réservez en ligne.">
 <meta property="og:image" content="https://raphwash.fr/assets/favicon.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="RaphWash — Detailing auto à domicile">
-<meta name="twitter:description" content="Detailing auto à domicile à Saint-Raphaël et sur toute la Côte d'Azur. Nettoyage intérieur, on se déplace chez vous. Réservez en ligne.">
+<meta name="twitter:description" content="Detailing auto à domicile à Saint-Raphaël, Fréjus et Sainte-Maxime. Nettoyage intérieur, on se déplace chez vous. Réservez en ligne.">
 <meta name="twitter:image" content="https://raphwash.fr/assets/favicon.png">
 <style>
   :root{
@@ -324,6 +324,29 @@
   .zone-item svg{width:18px;height:18px;color:var(--blue);flex:none;}
   .zone-item p{font-size:14.5px;}
 
+  /* zone communes directory */
+  .zc{margin-top:0;}
+  .zc-coverage{margin-top:28px;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:26px;box-shadow:var(--shadow-card);}
+  .zc-stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
+  .zc-stat{flex:1;min-width:150px;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 16px;}
+  .zc-stat b{display:block;font-family:var(--display);font-size:26px;font-variant-numeric:tabular-nums;}
+  .zc-stat.km b{color:#7FE0FF;}
+  .zc-stat.count b{color:#F0C878;}
+  .zc-stat.free b{color:#5FD8B8;}
+  .zc-stat span{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;font-weight:700;}
+  .zc-foot{margin-top:14px;font-size:11.5px;color:var(--text-muted);font-style:italic;}
+  .zc-towns{margin-top:16px;}
+  .zc-town-row{display:flex;gap:12px;font-size:12.5px;line-height:1.55;padding:8px 0;border-top:1px solid var(--border);}
+  .zc-town-row:first-child{border-top:none;padding-top:0;}
+  .zc-town-tag{flex:none;width:118px;font-weight:800;text-transform:uppercase;font-size:10.5px;letter-spacing:.03em;padding-top:1px;}
+  .zc-town-tag.core{color:#F0C878;}
+  .zc-town-tag.coast{color:#7FE0FF;}
+  .zc-town-tag.inland{color:#5FD8B8;}
+  .zc-town-tag.exception{color:var(--text-muted);}
+  .zc-town-names{color:var(--text-muted);}
+  .zc-town-names b{color:var(--text);font-weight:700;}
+  @media (max-width:480px){ .zc-town-row{flex-direction:column;gap:2px;} .zc-town-tag{width:auto;} }
+
   /* trust */
   .trust{border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
   .hours-card{max-width:480px;border:1px solid var(--border);background:var(--surface);border-radius:16px;padding:22px 26px;display:flex;flex-direction:column;box-shadow:var(--shadow-card);}
@@ -482,7 +505,7 @@
     <a href="#" class="brand" aria-label="Retour à l'accueil"><img src="assets/raphwash-logo.png" alt="RaphWash"></a>
     <ul class="nav-links">
       <li><a href="#hero">Accueil</a></li>
-      <li><a href="#services">Prestations</a></li>
+      <li><a href="#zone">Zone d'intervention</a></li>
       <li><a href="#tarifs">Formules</a></li>
       <li><a href="#resultats">Résultats</a></li>
       <li><a href="#avis">Avis</a></li>
@@ -496,7 +519,7 @@
   <div class="mobile-menu" id="mobile-menu" hidden>
     <ul class="mobile-menu-links">
       <li><a href="#hero">Accueil</a></li>
-      <li><a href="#services">Prestations</a></li>
+      <li><a href="#zone">Zone d'intervention</a></li>
       <li><a href="#tarifs">Formules</a></li>
       <li><a href="#resultats">Résultats</a></li>
       <li><a href="#avis">Avis</a></li>
@@ -510,9 +533,9 @@
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <p class="eyebrow">Saint-Raphaël · Côte d'Azur — Detailing auto à domicile</p>
+        <p class="eyebrow">Saint-Raphaël · Fréjus · Sainte-Maxime — Detailing auto à domicile</p>
         <h1>Plus qu'un lavage,<span class="grad">une attention</span></h1>
-        <p class="lead">Spécialiste du detailing intérieur automobile, RaphWash se déplace jusqu'à vous, à Saint-Raphaël comme sur toute la Côte d'Azur. Résultats bluffants sur sièges, moquette et cuir, avec des produits professionnels.</p>
+        <p class="lead">Spécialiste du detailing intérieur automobile, RaphWash se déplace jusqu'à vous, à Saint-Raphaël, Fréjus, Sainte-Maxime et les communes environnantes. Résultats bluffants sur sièges, moquette et cuir, avec des produits professionnels.</p>
         <div class="hero-actions">
           <a href="#reservation" class="btn btn-grad magnetic">Réserver maintenant →</a>
           <a href="#tarifs" class="btn-text">Voir les tarifs ↓</a>
@@ -589,11 +612,9 @@
   <div class="wrap" data-reveal>
     <div class="head">
       <p class="eyebrow">Zone d'intervention</p>
-      <h2>On vient à vous, sur toute la Côte d'Azur</h2>
+      <h2>On vient à vous, dans un rayon de 25 km autour de Saint-Raphaël</h2>
     </div>
-    <div class="zone-grid">
-    <div>
-      <p style="font-size:15px;">Basé à Saint-Raphaël, RaphWash intervient à votre domicile ou sur votre lieu de travail, sur toute la Côte d'Azur, aucun déplacement de votre part.</p>
+    <div style="max-width:640px;">
       <div class="zone-list">
         <div class="zone-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
@@ -609,22 +630,41 @@
         </div>
       </div>
     </div>
-    <div>
-      <div class="zone-infocard">
-        <div class="zone-infocard-head">
-          <div class="zone-infocard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
-          <div>
-            <b>Zone couverte</b>
-            <span>Saint-Raphaël &amp; Côte d'Azur</span>
+
+    <div class="zc" id="communes">
+      <div class="zc-coverage">
+        <h3 style="font-family:var(--display);text-transform:uppercase;font-size:clamp(18px,2.6vw,24px);margin:0;">Couverture &amp; déplacement autour de Saint-Raphaël</h3>
+        <p style="font-size:14px;color:var(--text-muted);margin-top:10px;max-width:64ch;">RaphWash intervient sur un ensemble de 14 communes situées dans un rayon de 25&nbsp;km.</p>
+        <div class="zc-stats">
+          <div class="zc-stat km"><b>~25 km</b><span>Rayon couvert</span></div>
+          <div class="zc-stat count">
+            <b>14</b>
+            <span>Communes desservies</span>
+          </div>
+          <div class="zc-stat free"><b>0 €</b><span>Frais de déplacement</span></div>
+        </div>
+        <div class="zc-towns">
+          <div class="zc-town-row">
+            <div class="zc-town-tag core">Cœur de zone</div>
+            <div class="zc-town-names"><b>Saint-Raphaël</b>, Fréjus, Boulouris, Agay, Le Dramont</div>
+          </div>
+          <div class="zc-town-row">
+            <div class="zc-town-tag coast">Côtière</div>
+            <div class="zc-town-names">Puget-sur-Argens, Roquebrune-sur-Argens, Les Issambres, Sainte-Maxime</div>
+          </div>
+          <div class="zc-town-row">
+            <div class="zc-town-tag inland">Intérieur</div>
+            <div class="zc-town-names">Les Adrets-de-l'Esterel, Bagnols-en-Forêt, Le Muy, La Motte</div>
+          </div>
+          <div class="zc-town-row">
+            <div class="zc-town-tag exception">Exception</div>
+            <div class="zc-town-names">Draguignan (~28 km)</div>
           </div>
         </div>
-        <div>
-          <div class="zone-stat-row"><span>Ville de base</span><span>Saint-Raphaël</span></div>
-          <div class="zone-stat-row"><span>Rayon d'intervention</span><span>Côte d'Azur</span></div>
-          <div class="zone-stat-row"><span>Déplacement</span><span>Inclus, sans frais</span></div>
-        </div>
+        <a href="#tarifs" class="btn btn-grad small" style="margin-top:18px;">Voir les formules et réserver &rarr;</a>
       </div>
-    </div>
+
+      <p class="zc-foot">Rayon à vol d'oiseau (pas les trajets routiers réels).</p>
     </div>
   </div>
 </section>
@@ -955,7 +995,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v11.5a3.5 3.5 0 1 1-3-3.47"/><path d="M14 3c.6 2.5 2.4 4.2 5 4.5"/></svg>
       </a>
     </div>
-    <p class="foot-copy">© 2026 RaphWash — Detailing intérieur à domicile, Saint-Raphaël &amp; Côte d'Azur.</p>
+    <p class="foot-copy">© 2026 RaphWash — Detailing intérieur à domicile, Saint-Raphaël, Fréjus &amp; Sainte-Maxime.</p>
     <p class="foot-legal">
       <button type="button" class="legal-link" data-legal="mentions">Mentions légales</button>
       <span>·</span>
@@ -1473,7 +1513,7 @@
         title: 'Conditions générales de vente',
         html:
           '<h4>Objet</h4>' +
-          '<p>Les présentes CGV encadrent les prestations de nettoyage et detailing automobile à domicile proposées par RaphWash sur la Côte d\'Azur.</p>' +
+          '<p>Les présentes CGV encadrent les prestations de nettoyage et detailing automobile à domicile proposées par RaphWash à Saint-Raphaël, Fréjus, Sainte-Maxime et les communes environnantes.</p>' +
           '<h4>Tarifs et réservation</h4>' +
           '<p>Les tarifs des formules Riviera, Signature et Prestige sont indiqués TTC sur le site. Un acompte de 10% est demandé en ligne pour valider la réservation d\'un créneau ; le solde est réglé directement sur place le jour de l\'intervention, par carte bancaire, espèces ou virement instantané.</p>' +
           '<h4>Annulation et report</h4>' +
