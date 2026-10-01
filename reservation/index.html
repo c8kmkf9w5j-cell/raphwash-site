@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RaphWash — Réservation</title>
+<meta http-equiv="refresh" content="0; url=/#reservation">
+<link rel="canonical" href="https://raphwash.fr/#reservation">
+<style>
+  html,body{margin:0;padding:0;height:100%;background:#050607;color:#F5F5F2;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+  .wrap{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px;}
+  .spinner{width:34px;height:34px;border-radius:50%;border:3px solid rgba(47,168,217,.25);border-top-color:#2FA8D9;animation:spin .8s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  p{margin:0;color:#B9BDC2;font-size:15px;}
+  a{color:#2FA8D9;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="spinner"></div>
+  <p>Redirection vers la réservation RaphWash…</p>
+  <p><a href="/#reservation">Cliquez ici si rien ne se passe</a></p>
+</div>
+<script>window.location.replace('/#reservation');</script>
+</body>
+</html>
