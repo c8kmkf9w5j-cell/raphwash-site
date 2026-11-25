@@ -76,29 +76,29 @@
     border-bottom:1px solid var(--border);
   }
   .nav{display:flex;align-items:center;justify-content:space-between;padding-block:8px;gap:10px;transition:padding-block .25s var(--ease-lift);}
-  @media (min-width:860px){ .nav{gap:20px;} }
+  @media (min-width:1240px){ .nav{gap:20px;} }
   header.scrolled .nav{padding-block:0;}
   .brand{display:flex;align-items:center;flex:none;}
   .brand img{height:60px;width:auto;display:block;mix-blend-mode:screen;}
   @media (min-width:520px){ .brand img{height:72px;} }
-  @media (min-width:860px){ .brand img{height:132px;} }
+  @media (min-width:1240px){ .brand img{height:132px;} }
   .nav-links{display:none;gap:22px;list-style:none;margin:0;padding:0;font-size:14px;font-weight:600;flex-wrap:wrap;}
-  @media (min-width:860px){ .nav-links{display:flex;} }
+  @media (min-width:1240px){ .nav-links{display:flex;} }
   .nav-links a{text-decoration:none;color:var(--text-muted);transition:color .15s;}
   .nav-links a:hover{color:var(--text);}
   .nav-cta{display:inline-flex;white-space:nowrap;padding:6px 10px;font-size:10.5px;flex:none;}
-  @media (min-width:860px){ .nav-cta{padding:9px 16px;font-size:12.5px;} }
+  @media (min-width:1240px){ .nav-cta{padding:9px 16px;font-size:12.5px;} }
   .nav-cta-short{display:inline;}
   .nav-cta-full{display:none;}
-  @media (min-width:860px){ .nav-cta-short{display:none;} .nav-cta-full{display:inline;} }
+  @media (min-width:1240px){ .nav-cta-short{display:none;} .nav-cta-full{display:inline;} }
 
   .nav-toggle{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);cursor:pointer;flex:none;}
   .nav-toggle svg{width:20px;height:20px;}
-  @media (min-width:860px){ .nav-toggle{display:none;} }
+  @media (min-width:1240px){ .nav-toggle{display:none;} }
 
   .mobile-menu{border-top:1px solid var(--border);padding:18px 24px 24px;display:flex;flex-direction:column;gap:18px;}
   .mobile-menu[hidden]{display:none;}
-  @media (min-width:860px){ .mobile-menu{display:none!important;} }
+  @media (min-width:1240px){ .mobile-menu{display:none!important;} }
   .mobile-menu-links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px;font-size:15.5px;font-weight:700;}
   .mobile-menu-links a{text-decoration:none;color:var(--text);}
   .mobile-menu .btn{width:100%;}
@@ -232,7 +232,7 @@
   /* pricing */
   .plans{display:grid;gap:22px;grid-template-columns:1fr;}
   @media (min-width:760px){ .plans{grid-template-columns:repeat(3,1fr);} }
-  .plans.single{max-width:420px;margin-inline:auto;}
+  .plans.single{max-width:420px;margin-inline:auto;grid-template-columns:1fr;}
   .plan{
     border:1px solid var(--border);background:var(--surface);border-radius:16px;padding:26px 20px;
     display:flex;flex-direction:column;gap:14px;position:relative;
@@ -513,7 +513,7 @@
       <li><a href="#club">Abonnement mensuel</a></li>
       <li><a href="#resultats">Résultats</a></li>
       <li><a href="#avis">Avis</a></li>
-      <li><a href="#faq">Faq</a></li>
+      <li><a href="#faq">FAQ</a></li>
     </ul>
     <a href="#tarifs" class="btn btn-grad small nav-cta"><span class="nav-cta-short">Voir les tarifs</span><span class="nav-cta-full">Voir les tarifs et réserver</span></a>
     <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
@@ -528,7 +528,7 @@
       <li><a href="#club">Abonnement mensuel</a></li>
       <li><a href="#resultats">Résultats</a></li>
       <li><a href="#avis">Avis</a></li>
-      <li><a href="#faq">Faq</a></li>
+      <li><a href="#faq">FAQ</a></li>
     </ul>
     <a href="#tarifs" class="btn btn-grad">Voir les tarifs et réserver</a>
   </div>
