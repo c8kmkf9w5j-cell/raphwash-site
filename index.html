@@ -75,6 +75,8 @@
     background:rgba(8,7,12,.78);backdrop-filter:blur(12px);
     border-bottom:1px solid var(--border);
   }
+  section[id], [id="contact"]{ scroll-margin-top:100px; }
+  @media (min-width:1240px){ section[id], [id="contact"]{ scroll-margin-top:160px; } }
   .nav{display:flex;align-items:center;justify-content:space-between;padding-block:8px;gap:10px;transition:padding-block .25s var(--ease-lift);}
   @media (min-width:1240px){ .nav{gap:14px;} }
   header.scrolled .nav{padding-block:0;}
