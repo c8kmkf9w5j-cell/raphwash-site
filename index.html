@@ -454,6 +454,22 @@
   .formule-card.selected .formule-check{background:var(--grad-blue);border-color:transparent;}
   .formule-card.selected .formule-check svg{opacity:1;}
 
+  .options-intro{margin-bottom:18px;font-size:14px;color:var(--text-muted);}
+  .options-list{display:flex;flex-direction:column;gap:14px;}
+  .option-row{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;border:1px solid var(--border);background:var(--surface-2);border-radius:12px;padding:16px 18px;cursor:pointer;transition:border-color .2s ease,background .2s ease;}
+  .option-row:hover{border-color:rgba(47,168,217,.4);}
+  .option-row b{display:block;font-size:15px;}
+  .option-sub{display:block;margin-top:3px;font-size:12.5px;color:var(--text-muted);}
+  .option-right{display:flex;align-items:center;gap:12px;flex:none;}
+  .option-price{font-family:var(--display);font-size:16px;color:#7FE0FF;}
+  .option-included{font-size:11px;font-weight:800;color:#7fd9a4;text-transform:uppercase;letter-spacing:.04em;}
+  .option-row input{position:absolute;opacity:0;width:0;height:0;}
+  .option-box{width:24px;height:24px;border-radius:7px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex:none;transition:background .2s ease,border-color .2s ease;}
+  .option-box::after{content:"";width:11px;height:7px;border-left:2.5px solid #050607;border-bottom:2.5px solid #050607;transform:rotate(-45deg) translateY(-1px);opacity:0;}
+  .option-row input:checked ~ .option-box{background:var(--grad-blue);border-color:transparent;}
+  .option-row input:checked ~ .option-box::after{opacity:1;}
+  .option-row.option-locked{cursor:default;opacity:.55;}
+
   .slot-note{margin-top:16px;font-size:12.5px;color:var(--text-muted);}
 
   .calendly-card{border:1px solid var(--border);background:var(--surface);border-radius:16px;padding:10px;margin-top:18px;box-shadow:var(--shadow-card);overflow:hidden;}
@@ -884,13 +900,14 @@
     <div class="head" data-reveal>
       <p class="eyebrow">Réservation</p>
       <h2>Réservez votre intervention</h2>
-      <p>3 étapes pour choisir votre formule et réserver votre créneau directement en ligne.</p>
+      <p>4 étapes pour choisir votre formule et réserver votre créneau directement en ligne.</p>
     </div>
 
     <div class="stepper" id="wiz-stepper" data-reveal>
       <div class="step-node" data-node="1"><div class="step-circle">1</div><div class="step-label">Formule</div></div>
-      <div class="step-node" data-node="2"><div class="step-circle">2</div><div class="step-label">Véhicule &amp; lieu</div></div>
-      <div class="step-node" data-node="3"><div class="step-circle">3</div><div class="step-label">Créneau</div></div>
+      <div class="step-node" data-node="2"><div class="step-circle">2</div><div class="step-label">Options</div></div>
+      <div class="step-node" data-node="3"><div class="step-circle">3</div><div class="step-label">Véhicule &amp; lieu</div></div>
+      <div class="step-node" data-node="4"><div class="step-circle">4</div><div class="step-label">Créneau</div></div>
     </div>
 
     <div class="wizard-grid" data-reveal>
@@ -950,7 +967,37 @@
         </div>
 
         <div class="step-panel" data-step="2" hidden>
-          <div class="step-title">Étape 2 — Véhicule</div>
+          <div class="step-title">Étape 2 — Options</div>
+          <p class="options-intro">Cochez ce qui correspond à votre véhicule.</p>
+          <div class="options-list">
+            <label class="option-row">
+              <div>
+                <b>Véhicule 7 places</b>
+                <span class="option-sub">Supplément pour les grands véhicules</span>
+              </div>
+              <div class="option-right">
+                <span class="option-price">+15 €</span>
+                <input type="checkbox" id="opt-places7" data-option="places7">
+                <span class="option-box"></span>
+              </div>
+            </label>
+            <label class="option-row" id="opt-row-poils">
+              <div>
+                <b>Poils d'animaux</b>
+                <span class="option-sub">Traitement spécifique si besoin</span>
+              </div>
+              <div class="option-right">
+                <span class="option-price" id="opt-poils-price">+15 €</span>
+                <span class="option-included" id="opt-poils-included" hidden>Inclus avec Prestige</span>
+                <input type="checkbox" id="opt-poils" data-option="poils">
+                <span class="option-box"></span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="step-panel" data-step="3" hidden>
+          <div class="step-title">Étape 3 — Véhicule</div>
           <div class="row2">
             <div class="field">
               <label for="f-vehicule">Véhicule (marque / modèle)</label>
@@ -973,8 +1020,8 @@
           </div>
         </div>
 
-        <div class="step-panel" data-step="3" hidden>
-          <div class="step-title">Étape 3 — Choisissez votre créneau</div>
+        <div class="step-panel" data-step="4" hidden>
+          <div class="step-title">Étape 4 — Choisissez votre créneau</div>
           <div class="recap-box" id="wiz-recap"></div>
           <p class="slot-note">Choisissez un créneau parmi mes disponibilités réelles ci-dessous. Le paiement de l'acompte de 10% se fait directement sur cette page pour confirmer votre réservation.</p>
           <div class="calendly-card">
@@ -1135,9 +1182,10 @@
       var isInt = Math.abs(rounded - Math.round(rounded)) < 0.001;
       return (isInt ? rounded.toFixed(0) : rounded.toFixed(2).replace('.', ',')) + ' €';
     }
-    var totalSteps = 3;
+    var totalSteps = 4;
     var currentStep = 1;
-    var state = { formule: null };
+    var state = { formule: null, options: { places7:false, poils:false } };
+    var OPTION_PRICES = { places7: 15, poils: 15 };
 
     var stepper = document.getElementById('wiz-stepper');
     var panels = form.querySelectorAll('.step-panel');
@@ -1406,9 +1454,36 @@
     if (vehiculeInput && vehiculeSuggest){ setupAutocomplete(vehiculeInput, vehiculeSuggest, VEHICLES, applyVehicleType); }
 
     var totalValueEl = document.getElementById('wiz-total-value');
+    function optionsTotal(){
+      var total = 0;
+      if (state.options.places7) total += OPTION_PRICES.places7;
+      if (state.options.poils && state.formule !== 'Prestige') total += OPTION_PRICES.poils;
+      return total;
+    }
     function updateTotal(){
       if (!totalValueEl) return;
-      totalValueEl.textContent = state.formule ? formatEuro(PRICE_VALUES[state.formule]) : '—';
+      totalValueEl.textContent = state.formule ? formatEuro(PRICE_VALUES[state.formule] + optionsTotal()) : '—';
+    }
+
+    var poilsRow = document.getElementById('opt-row-poils');
+    var poilsCheckbox = document.getElementById('opt-poils');
+    var poilsPriceEl = document.getElementById('opt-poils-price');
+    var poilsIncludedEl = document.getElementById('opt-poils-included');
+    function updatePoilsOptionUI(){
+      if (!poilsRow) return;
+      if (state.formule === 'Prestige'){
+        poilsCheckbox.checked = false;
+        poilsCheckbox.disabled = true;
+        state.options.poils = false;
+        poilsPriceEl.hidden = true;
+        poilsIncludedEl.hidden = false;
+        poilsRow.classList.add('option-locked');
+      } else {
+        poilsCheckbox.disabled = false;
+        poilsPriceEl.hidden = false;
+        poilsIncludedEl.hidden = true;
+        poilsRow.classList.remove('option-locked');
+      }
     }
 
     form.querySelectorAll('input[name="formule"]').forEach(function(r){
@@ -1416,6 +1491,14 @@
         state.formule = this.value;
         form.querySelectorAll('.formule-card').forEach(function(c){ c.classList.remove('selected'); });
         this.closest('.formule-card').classList.add('selected');
+        updatePoilsOptionUI();
+        updateTotal();
+      });
+    });
+
+    document.querySelectorAll('[data-option]').forEach(function(cb){
+      cb.addEventListener('change', function(){
+        state.options[this.dataset.option] = this.checked;
         updateTotal();
       });
     });
@@ -1465,13 +1548,16 @@
     function buildRecap(){
       var vehicule = form.querySelector('#f-vehicule').value.trim();
       var type = form.querySelector('#f-type').value;
-      var price = state.formule ? PRICE_VALUES[state.formule] : null;
-      var deposit = price ? price * 0.10 : null;
+      var base = state.formule ? PRICE_VALUES[state.formule] : null;
+      var total = base !== null ? base + optionsTotal() : null;
+      var deposit = total !== null ? total * 0.10 : null;
       var rows = [
-        ['Formule', state.formule ? state.formule + ' — ' + formatEuro(price) : '—'],
-        ['Véhicule', (vehicule || '—') + (type ? ' (' + type + ')' : '')],
-        ['Prix total du lavage', price ? formatEuro(price) : '—']
+        ['Formule', state.formule ? state.formule + ' — ' + formatEuro(base) : '—'],
+        ['Véhicule', (vehicule || '—') + (type ? ' (' + type + ')' : '')]
       ];
+      if (state.options.places7) rows.push(['Véhicule 7 places', formatEuro(OPTION_PRICES.places7)]);
+      if (state.options.poils && state.formule !== 'Prestige') rows.push(['Poils d\'animaux', formatEuro(OPTION_PRICES.poils)]);
+      rows.push(['Prix total du lavage', total !== null ? formatEuro(total) : '—']);
       recapEl.innerHTML = rows.map(function(r){
         return '<div class="recap-row"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>';
       }).join('')
@@ -1485,7 +1571,7 @@
 
     nextBtn.addEventListener('click', function(){
       if (currentStep === 1 && !state.formule){ showError('Choisissez une formule pour continuer.'); return; }
-      if (currentStep === 2){
+      if (currentStep === 3){
         var vehicule = form.querySelector('#f-vehicule').value.trim();
         if (!vehicule){ showError('Merci de renseigner le véhicule.'); return; }
       }
