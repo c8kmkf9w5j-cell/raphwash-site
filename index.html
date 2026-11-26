@@ -427,6 +427,7 @@
   .step-title{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;}
 
   .formule-pick{display:flex;flex-direction:column;gap:18px;}
+  @media (min-width:760px){ .formule-pick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:20px;} .formule-card{justify-content:space-between;} .formule-price{display:flex;flex-direction:column;gap:2px;} }
   .formule-card{position:relative;border:1px solid var(--border);background:var(--surface-2);border-radius:16px;padding:22px 24px;cursor:pointer;display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow-card);transition:border-color .2s ease,background .2s ease,box-shadow .25s var(--ease-lift),transform .25s var(--ease-lift);}
   .formule-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-card-hover);}
   .formule-card input{position:absolute;opacity:0;width:0;height:0;}
@@ -440,8 +441,12 @@
   .formule-sub{display:block;margin-top:4px;font-size:12.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700;}
 
   .formule-features{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  @media (min-width:760px){ .formule-features{flex:1 1 auto;} .formule-title{min-height:78px;} }
   .formule-features li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text-muted);}
   .formule-features li svg{width:16px;height:16px;flex:none;margin-top:2px;color:var(--blue);}
+  .formule-features li .plan-plus{align-self:flex-start;margin-top:2px;}
+  .formule-included-spacer{display:none;visibility:hidden;}
+  @media (min-width:760px){ .formule-included-spacer{display:block;} }
 
   .formule-meta{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text-muted);}
   .formule-meta svg{width:15px;height:15px;color:var(--blue);flex:none;}
@@ -453,6 +458,10 @@
 
   .formule-price .price-unit{font-family:var(--sans);font-size:13px;color:var(--text-muted);font-weight:700;text-transform:none;text-shadow:none;}
   .formule-card .plan-included-wrap{align-self:flex-start;max-width:100%;}
+  @media (min-width:760px){
+    .formule-card .plan-included{font-size:11px;gap:6px;padding:6px 11px;white-space:nowrap;}
+    .formule-card .plan-included-check{width:14px;height:14px;}
+  }
   .formule-check{width:32px;height:32px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex:none;transition:background .2s ease,border-color .2s ease;}
   .formule-check svg{width:16px;height:16px;color:#050607;opacity:0;transition:opacity .15s ease;}
   .formule-card.selected .formule-check{background:var(--grad-blue);border-color:transparent;}
@@ -919,6 +928,9 @@
             <label class="formule-card" data-formule-card="Riviera">
               <input type="radio" name="formule" value="Riviera">
               <b class="formule-title">Riviera<span class="formule-sub">Un int&eacute;rieur propre et frais</span></b>
+              <div class="plan-included-wrap formule-included-spacer" aria-hidden="true">
+                <div class="plan-included"><svg class="plan-included-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg><span class="plan-included-label">Tout le pack inclus</span></div>
+              </div>
               <ul class="formule-features">
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12c0-3 2-4 2-7M12 12c0-4 3-5 3-9M18 12c0-3 2-4 2-7"/><path d="M4 18h16"/></svg>Aspiration si&egrave;ges, moquettes et coffre</li>
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/><circle cx="8" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r=".6" fill="currentColor" stroke="none"/></svg>D&eacute;poussi&eacute;rage tableau de bord et a&eacute;rateurs</li>
@@ -927,7 +939,7 @@
               </ul>
               <div class="formule-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Environ 1h30</div>
               <div class="formule-bottom">
-                <span class="formule-price"><span class="price-num"><b data-count="59">59</b> €</span> <span class="price-unit">/ intervention</span></span>
+                <span class="formule-price"><span class="price-num"><b data-count="59">59</b> €</span></span>
                 <span class="formule-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
               </div>
             </label>
@@ -945,7 +957,7 @@
               </ul>
               <div class="formule-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Environ 2h15</div>
               <div class="formule-bottom">
-                <span class="formule-price formule-price-gold"><span class="price-num"><b data-count="89">89</b> €</span> <span class="price-unit">/ intervention</span></span>
+                <span class="formule-price formule-price-gold"><span class="price-num"><b data-count="89">89</b> €</span></span>
                 <span class="formule-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
               </div>
             </label>
@@ -962,7 +974,7 @@
               </ul>
               <div class="formule-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Environ 3h</div>
               <div class="formule-bottom">
-                <span class="formule-price"><span class="price-num"><b data-count="119">119</b> €</span> <span class="price-unit">/ intervention</span></span>
+                <span class="formule-price"><span class="price-num"><b data-count="119">119</b> €</span></span>
                 <span class="formule-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
               </div>
             </label>
