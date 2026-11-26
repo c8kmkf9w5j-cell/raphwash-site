@@ -434,8 +434,10 @@
 
   .formule-badge{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:7px 15px;border-radius:999px;background:var(--grad-blue);color:#071018;box-shadow:var(--glow-blue), inset 0 1px 0 rgba(255,255,255,.35);}
   .formule-badge.gold{background:var(--grad-gold);color:#050607;box-shadow:var(--glow-gold), inset 0 1px 0 rgba(255,255,255,.45);}
+  .formule-badge svg{width:12px;height:12px;flex:none;}
 
   .formule-title{font-family:var(--display);text-transform:uppercase;font-size:24px;letter-spacing:.01em;}
+  .formule-sub{display:block;margin-top:4px;font-size:12.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700;}
 
   .formule-features{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
   .formule-features li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text-muted);}
@@ -449,6 +451,7 @@
   .formule-price-gold{color:#F0C878;animation:priceGlowGold 3.4s ease-in-out infinite;}
   @media (prefers-reduced-motion:reduce){ .formule-price{animation:none;} }
 
+  .formule-price .price-unit{font-family:var(--sans);font-size:13px;color:var(--text-muted);font-weight:700;text-transform:none;text-shadow:none;}
   .formule-check{width:32px;height:32px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex:none;transition:background .2s ease,border-color .2s ease;}
   .formule-check svg{width:16px;height:16px;color:#050607;opacity:0;transition:opacity .15s ease;}
   .formule-card.selected .formule-check{background:var(--grad-blue);border-color:transparent;}
@@ -914,47 +917,51 @@
           <div class="formule-pick">
             <label class="formule-card" data-formule-card="Riviera">
               <input type="radio" name="formule" value="Riviera">
-              <b class="formule-title">Riviera</b>
+              <b class="formule-title">Riviera<span class="formule-sub">Un int&eacute;rieur propre et frais</span></b>
               <ul class="formule-features">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Aspiration si&egrave;ges, moquettes et coffre</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>D&eacute;poussi&eacute;rage tableau de bord et a&eacute;rateurs</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Nettoyage des vitres int&eacute;rieures et ext&eacute;rieures</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Parfum d'ambiance</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12c0-3 2-4 2-7M12 12c0-4 3-5 3-9M18 12c0-3 2-4 2-7"/><path d="M4 18h16"/></svg>Aspiration si&egrave;ges, moquettes et coffre</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/><circle cx="8" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r=".6" fill="currentColor" stroke="none"/></svg>D&eacute;poussi&eacute;rage tableau de bord et a&eacute;rateurs</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 4l7 7"/></svg>Nettoyage des vitres int&eacute;rieures et ext&eacute;rieures</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8c3 0 3-3 6-3s3 3 6 3"/><path d="M4 13c3 0 3-3 6-3s3 3 6 3"/><path d="M4 18c3 0 3-3 6-3s3 3 6 3"/></svg>Parfum d'ambiance</li>
               </ul>
               <div class="formule-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Environ 1h30</div>
               <div class="formule-bottom">
-                <span class="formule-price">59 €</span>
+                <span class="formule-price"><span class="price-num"><b data-count="59">59</b> €</span> <span class="price-unit">/ intervention</span></span>
                 <span class="formule-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
               </div>
             </label>
             <label class="formule-card" data-formule-card="Signature">
               <input type="radio" name="formule" value="Signature">
-              <span class="formule-badge gold">Best seller</span>
-              <b class="formule-title">Signature</b>
+              <span class="formule-badge gold"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg>Best seller</span>
+              <b class="formule-title">Signature<span class="formule-sub">Le soin du d&eacute;tail</span></b>
+              <div class="plan-included-wrap">
+                <div class="plan-included"><svg class="plan-included-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg><span class="plan-included-label">Tout le pack Riviera inclus</span></div>
+              </div>
               <ul class="formule-features">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Tout le pack Riviera inclus</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Nettoyage tableau de bord, volant, pommeau de vitesse</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Shampouinage tissu (si&egrave;ges, tapis, moquettes)</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Nettoyage seuils de porte</li>
+                <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/><circle cx="8" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r=".6" fill="currentColor" stroke="none"/></svg>Nettoyage tableau de bord, volant, pommeau de vitesse</li>
+                <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V9a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v2"/><path d="M6 20h13a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-6"/><path d="M6 20v-3"/><path d="M9 6h4"/></svg>Shampouinage tissu (si&egrave;ges, tapis, moquettes)</li>
+                <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 10h18M8 10v9M13 10v9"/></svg>Nettoyage seuils de porte</li>
               </ul>
               <div class="formule-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Environ 2h15</div>
               <div class="formule-bottom">
-                <span class="formule-price formule-price-gold">89 €</span>
+                <span class="formule-price formule-price-gold"><span class="price-num"><b data-count="89">89</b> €</span> <span class="price-unit">/ intervention</span></span>
                 <span class="formule-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
               </div>
             </label>
             <label class="formule-card" data-formule-card="Prestige">
               <input type="radio" name="formule" value="Prestige">
-              <b class="formule-title">Prestige</b>
+              <b class="formule-title">Prestige<span class="formule-sub">L'excellence sans compromis</span></b>
+              <div class="plan-included-wrap">
+                <div class="plan-included"><svg class="plan-included-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg><span class="plan-included-label">Tout le pack Signature inclus</span></div>
+              </div>
               <ul class="formule-features">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Tout le pack Signature inclus</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Extraction en profondeur si&egrave;ges tissus</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Nettoyage cuir en profondeur + nutrition</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>&Eacute;limination du sable incrust&eacute;</li>
+                <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V9a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v2"/><path d="M6 20h13a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-6"/><path d="M6 20v-3"/><path d="M9 6h4"/></svg>Extraction en profondeur si&egrave;ges tissus</li>
+                <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg>Nettoyage cuir en profondeur + nutrition</li>
+                <li><span class="plan-plus">+</span><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="6" cy="8" r="1.3"/><circle cx="11" cy="6" r="1"/><circle cx="16" cy="9" r="1.4"/><circle cx="8" cy="13" r="1"/><circle cx="13" cy="14" r="1.3"/><circle cx="18" cy="15" r="1"/><circle cx="5" cy="17" r="1.1"/><circle cx="10" cy="19" r="1"/><circle cx="15" cy="19" r="1.2"/></svg>&Eacute;limination du sable incrust&eacute;</li>
               </ul>
               <div class="formule-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Environ 3h</div>
               <div class="formule-bottom">
-                <span class="formule-price">119 €</span>
+                <span class="formule-price"><span class="price-num"><b data-count="119">119</b> €</span> <span class="price-unit">/ intervention</span></span>
                 <span class="formule-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
               </div>
             </label>
