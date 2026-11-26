@@ -432,7 +432,7 @@
   .formule-card input{position:absolute;opacity:0;width:0;height:0;}
   .formule-card.selected{border-color:var(--blue);background:rgba(47,168,217,.1);box-shadow:var(--shadow-card-hover), 0 0 0 1px rgba(47,168,217,.3);}
 
-  .formule-badge{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:7px 15px;border-radius:999px;background:var(--grad-blue);color:#071018;box-shadow:var(--glow-blue), inset 0 1px 0 rgba(255,255,255,.35);}
+  .formule-badge{position:absolute;top:-14px;left:24px;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:7px 15px;border-radius:999px;background:var(--grad-blue);color:#071018;box-shadow:var(--glow-blue), inset 0 1px 0 rgba(255,255,255,.35);}
   .formule-badge.gold{background:var(--grad-gold);color:#050607;box-shadow:var(--glow-gold), inset 0 1px 0 rgba(255,255,255,.45);}
   .formule-badge svg{width:12px;height:12px;flex:none;}
 
@@ -452,6 +452,7 @@
   @media (prefers-reduced-motion:reduce){ .formule-price{animation:none;} }
 
   .formule-price .price-unit{font-family:var(--sans);font-size:13px;color:var(--text-muted);font-weight:700;text-transform:none;text-shadow:none;}
+  .formule-card .plan-included-wrap{align-self:flex-start;max-width:100%;}
   .formule-check{width:32px;height:32px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex:none;transition:background .2s ease,border-color .2s ease;}
   .formule-check svg{width:16px;height:16px;color:#050607;opacity:0;transition:opacity .15s ease;}
   .formule-card.selected .formule-check{background:var(--grad-blue);border-color:transparent;}
