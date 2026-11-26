@@ -495,6 +495,7 @@
   .recap-row span:last-child{font-weight:700;text-align:right;}
   .recap-row.recap-highlight span{color:var(--gold);font-weight:800;}
   .recap-row.recap-highlight{border-top:1px solid var(--border);padding-top:9px;}
+  .recap-note{font-size:11.5px;color:var(--text-muted);font-style:italic;margin-top:-2px;}
 
   .wizard-actions{position:sticky;bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:28px;background:rgba(15,32,54,.92);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow-card-hover);}
   .wiz-total{display:flex;flex-direction:column;align-items:center;line-height:1.25;flex:none;}
@@ -1040,7 +1041,7 @@
         <div class="step-panel" data-step="4" hidden>
           <div class="step-title">Étape 4 — Choisissez votre créneau</div>
           <div class="recap-box" id="wiz-recap"></div>
-          <p class="slot-note">Choisissez un créneau parmi mes disponibilités réelles ci-dessous. Le paiement de l'acompte de 10% se fait directement sur cette page pour confirmer votre réservation.</p>
+          <p class="slot-note">Choisissez un créneau parmi mes disponibilités réelles ci-dessous. Le paiement de l'acompte de 10% (sur la formule de base) se fait directement sur cette page pour confirmer votre réservation. Le solde, options comprises, est à régler sur place le jour de l'intervention.</p>
           <div class="calendly-card">
             <div id="calendly-embed" style="min-width:280px;height:680px;"></div>
           </div>
@@ -1574,7 +1575,8 @@
       var type = form.querySelector('#f-type').value;
       var base = state.formule ? PRICE_VALUES[state.formule] : null;
       var total = base !== null ? base + optionsTotal() : null;
-      var deposit = total !== null ? total * 0.10 : null;
+      var deposit = base !== null ? base * 0.10 : null;
+      var balance = (total !== null && deposit !== null) ? total - deposit : null;
       var rows = [
         ['Formule', state.formule ? state.formule + ' — ' + formatEuro(base) : '—'],
         ['Véhicule', (vehicule || '—') + (type ? ' (' + type + ')' : '')]
@@ -1585,7 +1587,9 @@
       recapEl.innerHTML = rows.map(function(r){
         return '<div class="recap-row"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>';
       }).join('')
-        + '<div class="recap-row recap-highlight"><span>Acompte à régler aujourd\'hui</span><span>' + (deposit ? formatEuro(deposit) : '—') + '</span></div>';
+        + '<div class="recap-row recap-highlight"><span>Acompte à régler aujourd\'hui</span><span>' + (deposit ? formatEuro(deposit) : '—') + '</span></div>'
+        + '<p class="recap-note">*Acompte de 10% calculé sur le prix de la formule de base, hors options.</p>'
+        + '<div class="recap-row"><span>Solde à régler sur place</span><span>' + (balance !== null ? formatEuro(balance) : '—') + '</span></div>';
     }
 
     function showError(msg){
