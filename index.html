@@ -500,7 +500,9 @@
   .wiz-total{display:flex;flex-direction:column;align-items:center;line-height:1.25;flex:none;}
   .wiz-total span{font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);white-space:nowrap;}
   .wiz-total strong{font-family:var(--display);font-size:19px;color:var(--gold);white-space:nowrap;}
+  .wizard-actions .btn{white-space:nowrap;}
   @media (max-width:380px){ .wizard-actions{padding:12px 10px;gap:8px;} .btn-ghost, .wizard-actions .btn{padding-inline:16px;} }
+  @media (max-width:400px){ .wizard-actions .btn{font-size:14px;padding-inline:16px;} .wizard-actions .btn-ghost{padding-inline:14px;} }
   .wizard-error{font-size:13px;color:var(--gold);margin-top:14px;display:none;}
   .wizard-error.show{display:block;}
 
@@ -1545,6 +1547,7 @@
       panels.forEach(function(p){ p.hidden = (parseInt(p.dataset.step, 10) !== n); });
       backBtn.style.visibility = (n === 1) ? 'hidden' : 'visible';
       nextBtn.hidden = (n === totalSteps);
+      nextBtn.textContent = (n === totalSteps - 1) ? 'Disponibilités →' : 'Continuer →';
       if (n === totalSteps){
         buildRecap();
         var vehiculeVal = form.querySelector('#f-vehicule').value.trim();
