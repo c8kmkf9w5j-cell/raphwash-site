@@ -426,17 +426,33 @@
   .wizard-aside{order:2;}
   .step-title{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;}
 
-  .formule-pick{display:grid;gap:14px;grid-template-columns:1fr;}
-  @media (min-width:520px){ .formule-pick{grid-template-columns:repeat(3,1fr);} }
-  .formule-card{position:relative;border:1px solid var(--border);background:var(--surface-2);border-radius:12px;padding:14px;cursor:pointer;display:flex;flex-direction:column;gap:4px;box-shadow:var(--shadow-card);transition:border-color .2s ease,background .2s ease,box-shadow .25s var(--ease-lift),transform .25s var(--ease-lift);}
+  .formule-pick{display:flex;flex-direction:column;gap:18px;}
+  .formule-card{position:relative;border:1px solid var(--border);background:var(--surface-2);border-radius:16px;padding:22px 24px;cursor:pointer;display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow-card);transition:border-color .2s ease,background .2s ease,box-shadow .25s var(--ease-lift),transform .25s var(--ease-lift);}
   .formule-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-card-hover);}
   .formule-card input{position:absolute;opacity:0;width:0;height:0;}
-  .formule-card b{font-family:var(--display);text-transform:uppercase;font-size:17px;letter-spacing:.01em;}
-  .formule-card span{font-size:13px;color:var(--text-muted);}
-  .formule-price{font-family:var(--display);font-size:15px;color:#7FE0FF;font-weight:400;animation:priceGlowBlue 3.4s ease-in-out infinite;}
+  .formule-card.selected{border-color:var(--blue);background:rgba(47,168,217,.1);box-shadow:var(--shadow-card-hover), 0 0 0 1px rgba(47,168,217,.3);}
+
+  .formule-badge{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:7px 15px;border-radius:999px;background:var(--grad-blue);color:#071018;box-shadow:var(--glow-blue), inset 0 1px 0 rgba(255,255,255,.35);}
+  .formule-badge.gold{background:var(--grad-gold);color:#050607;box-shadow:var(--glow-gold), inset 0 1px 0 rgba(255,255,255,.45);}
+
+  .formule-title{font-family:var(--display);text-transform:uppercase;font-size:24px;letter-spacing:.01em;}
+
+  .formule-features{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .formule-features li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text-muted);}
+  .formule-features li svg{width:16px;height:16px;flex:none;margin-top:2px;color:var(--blue);}
+
+  .formule-meta{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text-muted);}
+  .formule-meta svg{width:15px;height:15px;color:var(--blue);flex:none;}
+
+  .formule-bottom{display:flex;align-items:center;justify-content:space-between;}
+  .formule-price{font-family:var(--display);font-size:36px;color:#7FE0FF;font-weight:400;animation:priceGlowBlue 3.4s ease-in-out infinite;}
   .formule-price-gold{color:#F0C878;animation:priceGlowGold 3.4s ease-in-out infinite;}
   @media (prefers-reduced-motion:reduce){ .formule-price{animation:none;} }
-  .formule-card.selected{border-color:var(--blue);background:rgba(47,168,217,.1);box-shadow:var(--shadow-card-hover), 0 0 0 1px rgba(47,168,217,.3);}
+
+  .formule-check{width:32px;height:32px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex:none;transition:background .2s ease,border-color .2s ease;}
+  .formule-check svg{width:16px;height:16px;color:#050607;opacity:0;transition:opacity .15s ease;}
+  .formule-card.selected .formule-check{background:var(--grad-blue);border-color:transparent;}
+  .formule-card.selected .formule-check svg{opacity:1;}
 
   .slot-note{margin-top:16px;font-size:12.5px;color:var(--text-muted);}
 
@@ -451,7 +467,11 @@
   .recap-row.recap-highlight span{color:var(--gold);font-weight:800;}
   .recap-row.recap-highlight{border-top:1px solid var(--border);padding-top:9px;}
 
-  .wizard-actions{display:flex;justify-content:space-between;gap:14px;margin-top:28px;}
+  .wizard-actions{position:sticky;bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:28px;background:rgba(15,32,54,.92);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow-card-hover);}
+  .wiz-total{display:flex;flex-direction:column;align-items:center;line-height:1.25;flex:none;}
+  .wiz-total span{font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);white-space:nowrap;}
+  .wiz-total strong{font-family:var(--display);font-size:19px;color:var(--gold);white-space:nowrap;}
+  @media (max-width:380px){ .wizard-actions{padding:12px 10px;gap:8px;} .btn-ghost, .wizard-actions .btn{padding-inline:16px;} }
   .wizard-error{font-size:13px;color:var(--gold);margin-top:14px;display:none;}
   .wizard-error.show{display:block;}
 
@@ -878,9 +898,54 @@
         <div class="step-panel" data-step="1">
           <div class="step-title">Étape 1 — Choisissez votre formule</div>
           <div class="formule-pick">
-            <label class="formule-card" data-formule-card="Riviera"><input type="radio" name="formule" value="Riviera"><b>Riviera</b><span><b class="formule-price">59 €</b> — un intérieur propre et frais</span></label>
-            <label class="formule-card" data-formule-card="Signature"><input type="radio" name="formule" value="Signature"><b>Signature</b><span><b class="formule-price formule-price-gold">89 €</b> — le soin du détail</span></label>
-            <label class="formule-card" data-formule-card="Prestige"><input type="radio" name="formule" value="Prestige"><b>Prestige</b><span><b class="formule-price">119 €</b> — l'excellence sans compromis</span></label>
+            <label class="formule-card" data-formule-card="Riviera">
+              <input type="radio" name="formule" value="Riviera">
+              <span class="formule-badge">Petit prix</span>
+              <b class="formule-title">Riviera</b>
+              <ul class="formule-features">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Aspiration si&egrave;ges, moquettes et coffre</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>D&eacute;poussi&eacute;rage tableau de bord et a&eacute;rateurs</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Nettoyage des vitres int&eacute;rieures et ext&eacute;rieures</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Parfum d'ambiance</li>
+              </ul>
+              <div class="formule-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Environ 1h</div>
+              <div class="formule-bottom">
+                <span class="formule-price">59 €</span>
+                <span class="formule-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+              </div>
+            </label>
+            <label class="formule-card" data-formule-card="Signature">
+              <input type="radio" name="formule" value="Signature">
+              <span class="formule-badge gold">Best seller</span>
+              <b class="formule-title">Signature</b>
+              <ul class="formule-features">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Tout le pack Riviera inclus</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Nettoyage tableau de bord, volant, pommeau de vitesse</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Shampouinage tissu (si&egrave;ges, tapis, moquettes)</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Nettoyage seuils de porte</li>
+              </ul>
+              <div class="formule-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Environ 1h30</div>
+              <div class="formule-bottom">
+                <span class="formule-price formule-price-gold">89 €</span>
+                <span class="formule-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+              </div>
+            </label>
+            <label class="formule-card" data-formule-card="Prestige">
+              <input type="radio" name="formule" value="Prestige">
+              <span class="formule-badge gold">Haut de gamme</span>
+              <b class="formule-title">Prestige</b>
+              <ul class="formule-features">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Tout le pack Signature inclus</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Extraction en profondeur si&egrave;ges tissus</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Nettoyage cuir en profondeur + nutrition</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>&Eacute;limination poils d'animaux (habitacle + coffre)</li>
+              </ul>
+              <div class="formule-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Environ 2h30</div>
+              <div class="formule-bottom">
+                <span class="formule-price">119 €</span>
+                <span class="formule-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+              </div>
+            </label>
           </div>
         </div>
 
@@ -922,6 +987,7 @@
 
         <div class="wizard-actions">
           <button type="button" class="btn btn-ghost" id="wiz-back">← Retour</button>
+          <div class="wiz-total"><span>Total TTC</span><strong id="wiz-total-value">—</strong></div>
           <button type="button" class="btn btn-grad" id="wiz-next">Continuer →</button>
         </div>
       </div>
@@ -1339,11 +1405,18 @@
     var vehiculeSuggest = document.getElementById('vehicule-suggest');
     if (vehiculeInput && vehiculeSuggest){ setupAutocomplete(vehiculeInput, vehiculeSuggest, VEHICLES, applyVehicleType); }
 
+    var totalValueEl = document.getElementById('wiz-total-value');
+    function updateTotal(){
+      if (!totalValueEl) return;
+      totalValueEl.textContent = state.formule ? formatEuro(PRICE_VALUES[state.formule]) : '—';
+    }
+
     form.querySelectorAll('input[name="formule"]').forEach(function(r){
       r.addEventListener('change', function(){
         state.formule = this.value;
         form.querySelectorAll('.formule-card').forEach(function(c){ c.classList.remove('selected'); });
         this.closest('.formule-card').classList.add('selected');
+        updateTotal();
       });
     });
 
