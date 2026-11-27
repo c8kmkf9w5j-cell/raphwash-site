@@ -291,6 +291,22 @@
   .plan-note{font-size:12.5px;color:var(--text-muted);font-style:italic;}
   .plan > a.btn{margin-top:auto;}
 
+  /* fidélité */
+  .loyalty-tracker{position:relative;padding-top:4px;}
+  .loyalty-tracker-line{position:absolute;top:25px;left:21px;right:21px;height:3px;background:rgba(255,255,255,.1);}
+  .loyalty-tracker-line-fill{position:absolute;top:25px;left:21px;width:77%;height:3px;background:var(--grad-gold);}
+  .loyalty-tracker-steps{position:relative;display:flex;justify-content:space-between;}
+  .loyalty-tstep{display:flex;flex-direction:column;align-items:center;gap:8px;width:42px;flex:none;}
+  .loyalty-node{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;}
+  .loyalty-tstep.done .loyalty-node{background:var(--grad-gold);box-shadow:var(--glow-gold);}
+  .loyalty-tstep.done .loyalty-node svg{width:18px;height:18px;color:#1a1304;}
+  .loyalty-tstep.reward .loyalty-node{border:2px solid var(--blue);background:rgba(47,168,217,.14);}
+  .loyalty-tstep.reward .loyalty-node svg{width:18px;height:18px;color:var(--blue);}
+  .loyalty-tlabel{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--text-muted);text-align:center;}
+  .loyalty-tstep.reward .loyalty-tlabel{color:var(--blue);}
+  .loyalty-highlight{font-size:15px;font-weight:700;color:#F0F2F4;}
+  .gold-text{color:var(--gold);}
+
   /* parrainage */
   .referral{border-top:1px solid var(--border);}
   .referral-grid{display:grid;gap:14px;grid-template-columns:1fr;max-width:520px;margin-inline:auto;}
@@ -566,7 +582,7 @@
       <li><a href="#tarifs">Formules</a></li>
       <li><a href="#club">Abonnement mensuel</a></li>
       <li><a href="#resultats">Résultats</a></li>
-      <li><a href="#avis">Avis</a></li>
+      <li><a href="#fidelite">Fidélité</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <a href="#tarifs" class="btn btn-grad small nav-cta"><span class="nav-cta-short">Voir les tarifs</span><span class="nav-cta-full">Voir les tarifs et réserver</span></a>
@@ -581,7 +597,7 @@
       <li><a href="#tarifs">Formules</a></li>
       <li><a href="#club">Abonnement mensuel</a></li>
       <li><a href="#resultats">Résultats</a></li>
-      <li><a href="#avis">Avis</a></li>
+      <li><a href="#fidelite">Fidélité</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <a href="#tarifs" class="btn btn-grad">Voir les tarifs et réserver</a>
@@ -1018,6 +1034,40 @@
           <div class="wiz-total"><span>Total TTC</span><strong id="wiz-total-value">—</strong></div>
           <button type="button" class="btn btn-grad" id="wiz-next">Continuer →</button>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fidelite">
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <p class="eyebrow">Programme de fidélité</p>
+      <h2>5 prestations, la 6ème à -50%</h2>
+      <p>Après 5 prestations chez RaphWash, bénéficiez de -50% sur la 6ème.</p>
+    </div>
+    <div class="plans single" data-reveal>
+      <div class="plan featured">
+        <div class="plan-badge badge-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>Fidélité</div>
+        <div>
+          <div class="plan-name">Carte de fidélité</div>
+          <div class="plan-sub">Valable sur toutes les formules</div>
+        </div>
+        <div class="loyalty-tracker">
+          <div class="loyalty-tracker-line"></div>
+          <div class="loyalty-tracker-line-fill"></div>
+          <div class="loyalty-tracker-steps">
+            <div class="loyalty-tstep done"><div class="loyalty-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><div class="loyalty-tlabel">1</div></div>
+            <div class="loyalty-tstep done"><div class="loyalty-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><div class="loyalty-tlabel">2</div></div>
+            <div class="loyalty-tstep done"><div class="loyalty-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><div class="loyalty-tlabel">3</div></div>
+            <div class="loyalty-tstep done"><div class="loyalty-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><div class="loyalty-tlabel">4</div></div>
+            <div class="loyalty-tstep done"><div class="loyalty-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><div class="loyalty-tlabel">5</div></div>
+            <div class="loyalty-tstep reward"><div class="loyalty-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7S9 2 6.5 3.5 8 7 12 7z"/><path d="M12 7s3-5 5.5-3.5S16 7 12 7z"/></svg></div><div class="loyalty-tlabel">-50%</div></div>
+          </div>
+        </div>
+        <p class="loyalty-highlight">Au bout de <span class="gold-text">5 prestations</span>, la 6ème est à <span class="gold-text">-50%</span></p>
+        <p class="plan-note">*Sans date d'expiration — le suivi est fait automatiquement à chaque réservation.</p>
+        <a href="#reservation" class="btn btn-grad">Réserver maintenant →</a>
       </div>
     </div>
   </div>
